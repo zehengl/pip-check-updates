@@ -1,0 +1,18 @@
+{
+  "autoDocstring.docstringFormat": "google",
+  "editor.formatOnSave": true,
+  "editor.rulers": [88, 120],
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "python.formatting.blackPath": "black",
+  "python.formatting.provider": "black",
+  "python.linting.pylintPath": "pylint",
+  "python.linting.pylintUseMinimalCheckers": false,
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorTheme": "Oceanic Next (dimmed bg)",
+  "workbench.productIconTheme": "material-product-icons",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  }
+}
