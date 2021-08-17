@@ -12,7 +12,11 @@ with open(path.join(here, "requirements.txt")) as f:
 setup(
     name="pip-check-updates",
     packages=find_packages(),
-    entry_points={"console_scripts": []},
+    entry_points={
+        "console_scripts": [
+            "pcu = pip_check_updates.__main__:run",
+        ]
+    },
     include_package_data=True,
     package_data={},
     install_requires=requirements,
