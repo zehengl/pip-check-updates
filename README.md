@@ -123,6 +123,7 @@ pcu -h
     -u, --upgrade         overwrite package file with upgraded versions instead of just outputting to console.
     -t {latest,newest,greatest,minor,patch}, --target {latest,newest,greatest,minor,patch}
                             target version to upgrade to: latest, newest, greatest, minor, patch.
+    --no_ssl_verify       disable SSL verification.
 
 ## Test
 
