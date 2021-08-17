@@ -4,7 +4,12 @@
 
 # pip-check-updates
 
+[![pytest](https://github.com/zehengl/pip-check-updates/actions/workflows/pytest.yml/badge.svg)](https://github.com/zehengl/pip-check-updates/actions/workflows/pytest.yml)
 ![coding_style](https://img.shields.io/badge/code%20style-black-000000.svg)
+![PyPI - License](https://img.shields.io/pypi/l/pip-check-updates)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pip-check-updates)
+![PyPI - License](https://img.shields.io/pypi/l/pip-check-updates)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/pip-check-updates)
 
 A tool to upgrade dependencies to the latest versions, inspired by [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
 
@@ -78,6 +83,25 @@ pcu requirements-dev.txt
     black   21.6b0  →  21.7b0
     pylint  2.9.3   →  2.9.6
     pytest  5.4.3   →  6.2.4
+
+    Run pcu -u to upgrade requirements.txt and requirements-dev.txt
+
+Target version:
+
+```terminal
+pcu requirements-dev.txt -t patch
+```
+
+    Checking dependencies
+    100%|████████████████████| 10/10 [00:02<00:00,  4.73it/s]
+
+    In requirements.txt
+
+    tqdm  4.62.0  →  4.62.1
+
+    In requirements-dev.txt
+
+    pylint  2.9.3  →  2.9.6
 
     Run pcu -u to upgrade requirements.txt and requirements-dev.txt
 
