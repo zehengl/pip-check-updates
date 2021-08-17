@@ -3,8 +3,8 @@ import re
 import requests
 
 
-def get_latest_version(name):
-    r = requests.get(f"https://pypi.org/pypi/{name}/json")
+def get_latest_version(name, no_ssl_verify):
+    r = requests.get(f"https://pypi.org/pypi/{name}/json", verify=not no_ssl_verify)
     if r.status_code == 200:
         version = r.json()["info"]["version"]
         return version

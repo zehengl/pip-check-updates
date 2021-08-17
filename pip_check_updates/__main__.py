@@ -1,5 +1,6 @@
 import argparse
 
+import urllib3
 from colorama import Fore, Style, init
 from tabulate import tabulate
 from tqdm import tqdm
@@ -28,6 +29,12 @@ def get_args():
         choices=["latest", "newest", "greatest", "minor", "patch"],
         help="target version to upgrade to: latest, newest, greatest, minor, patch.",
     )
+    parser.add_argument(
+        "--no_ssl_verify",
+        action="store_true",
+        default=False,
+        help="disable SSL verification.",
+    )
 
     args = parser.parse_args()
 
@@ -53,6 +60,10 @@ def run():
     path = args.path
     upgrade = args.upgrade
     target = args.target
+    no_ssl_verify = args.no_ssl_verify
+
+    if no_ssl_verify:
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     deps = load_dependencies(path)
 
@@ -63,7 +74,7 @@ def run():
     for path, name, current_version, op in tqdm(
         deps, bar_format="{l_bar}{bar:20}{r_bar}"
     ):
-        latest_version = get_latest_version(name)
+        latest_version = get_latest_version(name, no_ssl_verify)
         change = compare_versions(current_version, latest_version)
 
         if not change:
