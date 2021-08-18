@@ -61,7 +61,7 @@ pcu -u
     pandas  0.25.3  →  1.3.2
     Django  3.1.13  →  3.2.6
 
-    Run pip install -r ... to install new versions
+    Run pip install -r requirements.txt to install new versions
 
 Specify requirements file if needed, `-r` option will be recognized as well:
 
@@ -104,6 +104,22 @@ pcu requirements-dev.txt -t patch
     pylint  2.9.3  →  2.9.6
 
     Run pcu -u to upgrade requirements.txt and requirements-dev.txt
+
+Filter by a pattern:
+
+```terminal
+pcu requirements-dev.txt -f "py*"
+```
+
+    Checking dependencies
+    100%|████████████████████| 10/10 [00:01<00:00,  6.01it/s]
+
+    In requirements-dev.txt
+
+    pylint  2.9.3  →  2.9.6
+    pytest  5.4.3  →  6.2.4
+
+    Run pcu -u to upgrade requirements-dev.txt
 
 Show the helper text:
 
