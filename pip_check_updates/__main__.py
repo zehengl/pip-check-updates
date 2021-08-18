@@ -1,4 +1,6 @@
 import argparse
+import fnmatch
+import re
 
 import urllib3
 from colorama import Fore, Style, init
@@ -6,6 +8,10 @@ from tabulate import tabulate
 from tqdm import tqdm
 
 from . import compare_versions, get_latest_version, load_dependencies
+
+
+def is_a_match(pattern, name):
+    return re.compile(fnmatch.translate(pattern)).match(name) is not None
 
 
 def get_args():
@@ -22,6 +28,12 @@ def get_args():
         action="store_true",
         default=False,
         help="overwrite package file with upgraded versions instead of just outputting to console.",
+    )
+    parser.add_argument(
+        "-f",
+        "--filter",
+        nargs="+",
+        help="include only package names matching the given strings.",
     )
     parser.add_argument(
         "-t",
@@ -57,15 +69,16 @@ def run():
     init()
 
     args = get_args()
-    path = args.path
+    req_path = args.path
     upgrade = args.upgrade
     target = args.target
     no_ssl_verify = args.no_ssl_verify
+    filter_ = args.filter
 
     if no_ssl_verify:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-    deps = load_dependencies(path)
+    deps = load_dependencies(req_path)
 
     action = "Upgrading" if upgrade else "Checking"
     print(f"{action} dependencies")
@@ -77,19 +90,15 @@ def run():
         latest_version = get_latest_version(name, no_ssl_verify)
         change = compare_versions(current_version, latest_version)
 
-        if not change:
+        if any(
+            [
+                not change,
+                filter_ and not any([is_a_match(pattern, name) for pattern in filter_]),
+                target == "minor" and change == "major",
+                target == "patch" and change in ["major", "minor"],
+            ]
+        ):
             continue
-
-        if target in ["latest, newest", "greatest"]:
-            pass
-
-        if target == "minor":
-            if change == "major":
-                continue
-
-        if target == "patch":
-            if change in ["major", "minor"]:
-                continue
 
         if path not in results:
             results[path] = []
@@ -130,7 +139,7 @@ def run():
         if upgrade:
             print(
                 "Run",
-                Fore.YELLOW + "pip install -r ..." + Style.RESET_ALL,
+                Fore.YELLOW + f"pip install -r {req_path}" + Style.RESET_ALL,
                 "to install new versions",
             )
         else:

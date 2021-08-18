@@ -121,6 +121,8 @@ pcu -h
     optional arguments:
     -h, --help            show this help message and exit
     -u, --upgrade         overwrite package file with upgraded versions instead of just outputting to console.
+    -f FILTER [FILTER ...], --filter FILTER [FILTER ...]
+                            include only package names matching the given string.
     -t {latest,newest,greatest,minor,patch}, --target {latest,newest,greatest,minor,patch}
                             target version to upgrade to: latest, newest, greatest, minor, patch.
     --no_ssl_verify       disable SSL verification.
