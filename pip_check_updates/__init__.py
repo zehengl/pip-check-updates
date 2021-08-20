@@ -21,16 +21,16 @@ def compare_versions(current_version, latest_version):
     current_versioning = current_version.split(".")
     latest_versioning = latest_version.split(".")
 
-    current_versioning = current_versioning + ["0"] * (3 - len(current_versioning))
-    latest_versioning = latest_versioning + ["0"] * (3 - len(latest_versioning))
+    max_size = max(len(current_versioning), len(latest_versioning))
+    if max_size < 3:
+        max_size = 3
 
-    if all(
-        [
-            latest_versioning[:3] == current_versioning[:3],
-            len(latest_versioning) == 3,
-            len(current_versioning) == 3,
-        ]
-    ):
+    current_versioning = current_versioning + ["0"] * (
+        max_size - len(current_versioning)
+    )
+    latest_versioning = latest_versioning + ["0"] * (max_size - len(latest_versioning))
+
+    if latest_versioning == current_versioning:
         return None
 
     if latest_versioning[0] != current_versioning[0]:

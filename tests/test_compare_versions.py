@@ -32,6 +32,9 @@ from pip_check_updates import compare_versions
         ("1.2.3", "1.2.3", None),
         ("1.2.3", "1.2.4", "patch"),
         ("1.2.3", "1.2.3.abc", "other"),
+        ("1.2.3.1", "1.2.3.1", None),
+        ("1.2.3", "1.2.3.0", None),
+        ("1.2.3", "1.2.3.0.0", None),
     ],
 )
 def test_compare_versions(current_version, latest_version, change):
