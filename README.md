@@ -10,6 +10,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pip-check-updates)
 ![PyPI - License](https://img.shields.io/pypi/l/pip-check-updates)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/pip-check-updates)
+[![Downloads](https://pepy.tech/badge/pip-check-updates)](https://pepy.tech/project/pip-check-updates)
 
 A tool to upgrade dependencies to the latest versions, inspired by [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
 
@@ -25,11 +26,16 @@ From [GitHub](https://github.com/zehengl/pip-check-updates)
 
 ## Usage
 
+> Depends on where you install `pip-check-updates`, if Python's scripts folder is not in `path`, the `pcu` entry point would not be available.
+> However you can replace `pcu` with `python -m pip-check-updates`.
+
 Show any new dependencies for the project in the current directory:
 
-- Red = major upgrade
-- Cyan = minor upgrade
-- Green = patch upgrade
+> Changes are color coded
+
+> - Red = major upgrade
+> - Cyan = minor upgrade
+> - Green = patch upgrade
 
 ```terminal
 pcu
