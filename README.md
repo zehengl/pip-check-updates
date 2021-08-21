@@ -133,7 +133,7 @@ Show the helper text:
 pcu -h
 ```
 
-    usage: pcu [-h] [-u] [-t {latest,newest,greatest,minor,patch}] [path]
+    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify] [path]
 
     pip-check-updates.
 
@@ -144,9 +144,11 @@ pcu -h
     -h, --help            show this help message and exit
     -u, --upgrade         overwrite package file with upgraded versions instead of just outputting to console.
     -f FILTER [FILTER ...], --filter FILTER [FILTER ...]
-                            include only package names matching the given string.
+                            include only package names matching the given strings.
     -t {latest,newest,greatest,minor,patch}, --target {latest,newest,greatest,minor,patch}
                             target version to upgrade to: latest, newest, greatest, minor, patch.
+    -x, --txt             output new requirements file instead of human-readable message.
+    -i, --interactive     enable interactive prompts for each dependency.
     --no_ssl_verify       disable SSL verification.
 
 ## Test
