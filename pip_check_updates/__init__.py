@@ -49,9 +49,13 @@ def load_dependencies(path="requirements.txt"):
     deps = []
     with open(path) as f:
         for dep in f.read().splitlines():
-            dep = dep.strip()
+            dep = re.sub("#.*", "", dep).strip()
+            if not dep:
+                continue
             if dep.startswith("-r"):
                 deps.extend(load_dependencies(dep.split()[-1]))
+                continue
+            if dep.startswith("-f"):
                 continue
             try:
                 name, current_version, op = get_current_version(dep)

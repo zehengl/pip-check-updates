@@ -173,7 +173,7 @@ def run():
                     )
                 )
 
-            print(tabulate(table, tablefmt="plain"))
+            print(tabulate(table, tablefmt="plain", disable_numparse=True))
 
             print()
 
