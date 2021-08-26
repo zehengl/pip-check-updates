@@ -150,6 +150,7 @@ pcu -h
     -x, --txt             output new requirements file instead of human-readable message.
     -i, --interactive     enable interactive prompts for each dependency.
     --no_ssl_verify       disable SSL verification.
+    --no_recursive        disable recursive checking.
 
 ## Test
 

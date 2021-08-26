@@ -45,15 +45,15 @@ def compare_versions(current_version, latest_version):
     return "other"
 
 
-def load_dependencies(path="requirements.txt"):
+def load_dependencies(path="requirements.txt", recursive=True):
     deps = []
     with open(path) as f:
         for dep in f.read().splitlines():
             dep = re.sub("#.*", "", dep).strip()
             if not dep:
                 continue
-            if dep.startswith("-r"):
-                deps.extend(load_dependencies(dep.split()[-1]))
+            if dep.startswith("-r") and recursive:
+                deps.extend(load_dependencies(dep.split()[-1], recursive))
                 continue
             if dep.startswith("-f"):
                 continue

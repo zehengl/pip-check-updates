@@ -61,6 +61,12 @@ def get_args():
         default=False,
         help="disable SSL verification.",
     )
+    parser.add_argument(
+        "--no_recursive",
+        action="store_true",
+        default=False,
+        help="disable recursive checking.",
+    )
 
     args = parser.parse_args()
 
@@ -90,6 +96,7 @@ def run():
     filter_ = args.filter
     txt_output = args.txt
     interactive = args.interactive
+    no_recursive = args.no_recursive
 
     if upgrade and txt_output:
         print("Oops, cannot specify both -u and -x. Please pick one.")
@@ -98,7 +105,7 @@ def run():
     if no_ssl_verify:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-    deps = load_dependencies(req_path)
+    deps = load_dependencies(req_path, not no_recursive)
 
     if not txt_output:
         action = "Upgrading" if upgrade else "Checking"
