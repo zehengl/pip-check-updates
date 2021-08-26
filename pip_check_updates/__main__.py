@@ -107,13 +107,13 @@ def run():
 
     deps = load_dependencies(req_path, not no_recursive)
 
-    if not txt_output:
+    if deps and not txt_output:
         action = "Upgrading" if upgrade else "Checking"
         print(f"{action} dependencies")
 
     results = {}
     for path, name, current_version, op in tqdm(
-        deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output
+        deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output or not deps
     ):
         latest_version = get_latest_version(name, no_ssl_verify)
         change = compare_versions(current_version, latest_version)
