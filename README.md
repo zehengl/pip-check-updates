@@ -133,7 +133,7 @@ Show the helper text:
 pcu -h
 ```
 
-    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify] [path]
+    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify] [--no_recursive] [path]
 
     pip-check-updates.
 
