@@ -14,5 +14,7 @@
   "workbench.productIconTheme": "material-product-icons",
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"
-  }
+  },
+  "editor.minimap.enabled": false,
+  "workbench.editor.enablePreview": false
 }
