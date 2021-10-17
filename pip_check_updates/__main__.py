@@ -1,6 +1,7 @@
 import argparse
 import fnmatch
 import re
+from pathlib import Path
 
 import urllib3
 from colorama import Fore, Style, init
@@ -111,6 +112,12 @@ def run():
         action = "Upgrading" if upgrade else "Checking"
         print(f"{action} dependencies")
 
+    if Path(".pcuignore").exists():
+        with open(".pcuignore") as f:
+            ignores = [pattern.strip() for pattern in f.readlines()]
+    else:
+        ignores =[]
+
     results = {}
     for path, name, current_version, op in tqdm(
         deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output or not deps
@@ -124,6 +131,7 @@ def run():
                 filter_ and not any([is_a_match(pattern, name) for pattern in filter_]),
                 target == "minor" and change == "major",
                 target == "patch" and change in ["major", "minor"],
+                any([is_a_match(pattern, name) for pattern in ignores])
             ]
         ):
             continue
