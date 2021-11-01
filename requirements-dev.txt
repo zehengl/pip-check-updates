@@ -1,7 +1,7 @@
 -r requirements.txt
-black==21.9b0
+black==21.10b0
 pylint==2.11.1
 pytest==6.2.5
-setuptools==58.2.0
+setuptools==58.4.0
 twine==3.4.2
 wheel==0.37.0
