@@ -2,6 +2,6 @@
 black==21.10b0
 pylint==2.11.1
 pytest==6.2.5
-setuptools==58.4.0
-twine==3.4.2
+setuptools==58.5.3
+twine==3.5.0
 wheel==0.37.0
