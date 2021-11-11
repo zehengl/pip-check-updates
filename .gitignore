@@ -1,6 +1,7 @@
 __pycache__
 .pytest_cache
 .eggs
+.tox
 *.egg-info
 build
 dist
