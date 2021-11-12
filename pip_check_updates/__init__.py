@@ -1,3 +1,4 @@
+import itertools
 import re
 
 import requests
@@ -62,5 +63,7 @@ def load_dependencies(path="requirements.txt", recursive=True):
                 deps.append([path, name, current_version, op])
             except:
                 pass
+
+    deps = list(dep for dep, _ in itertools.groupby(deps))
 
     return deps
