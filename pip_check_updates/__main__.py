@@ -116,7 +116,7 @@ def run():
         with open(".pcuignore") as f:
             ignores = [pattern.strip() for pattern in f.readlines()]
     else:
-        ignores =[]
+        ignores = []
 
     results = {}
     for path, name, current_version, op in tqdm(
@@ -131,7 +131,7 @@ def run():
                 filter_ and not any([is_a_match(pattern, name) for pattern in filter_]),
                 target == "minor" and change == "major",
                 target == "patch" and change in ["major", "minor"],
-                any([is_a_match(pattern, name) for pattern in ignores])
+                any([is_a_match(pattern, name) for pattern in ignores]),
             ]
         ):
             continue
