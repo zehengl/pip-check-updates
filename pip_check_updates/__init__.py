@@ -1,5 +1,6 @@
 import itertools
 import re
+from pathlib import Path
 
 import requests
 
@@ -47,20 +48,21 @@ def compare_versions(current_version, latest_version):
 
 
 def load_dependencies(path="requirements.txt", recursive=True):
+    p = Path(path).resolve()
     deps = []
-    with open(path) as f:
+    with open(p) as f:
         for dep in f.read().splitlines():
             dep = re.sub("#.*", "", dep).strip()
             if not dep:
                 continue
             if dep.startswith("-r") and recursive:
-                deps.extend(load_dependencies(dep.split()[-1], recursive))
+                deps.extend(load_dependencies(p.parent / dep.split()[-1], recursive))
                 continue
             if dep.startswith("-f"):
                 continue
             try:
                 name, current_version, op = get_current_version(dep)
-                deps.append([path, name, current_version, op])
+                deps.append([str(p), name, current_version, op])
             except:
                 pass
 
