@@ -8,7 +8,6 @@
 ![coding_style](https://img.shields.io/badge/code%20style-black-000000.svg)
 ![PyPI - License](https://img.shields.io/pypi/l/pip-check-updates)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pip-check-updates)
-![PyPI - License](https://img.shields.io/pypi/l/pip-check-updates)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/pip-check-updates)
 [![Downloads](https://pepy.tech/badge/pip-check-updates)](https://pepy.tech/project/pip-check-updates)
 
