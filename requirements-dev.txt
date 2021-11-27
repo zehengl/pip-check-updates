@@ -1,8 +1,8 @@
 -r requirements.txt
 black==21.11b1
-pylint==2.11.1
+pylint==2.12.1
 pytest==6.2.5
-setuptools==59.2.0
+setuptools==59.3.0
 tox==3.24.4
 twine==3.6.0
 wheel==0.37.0
