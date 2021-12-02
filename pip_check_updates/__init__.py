@@ -52,7 +52,9 @@ def load_dependencies(path="requirements.txt", recursive=True):
     deps = []
     with open(p) as f:
         for dep in f.read().splitlines():
-            dep = re.sub("#.*", "", dep).strip()
+            dep = re.sub(r"#.*", "", dep).strip()
+            dep = re.sub(r"{%.*?%}", "", dep).strip()
+            dep = re.sub(r"{{.*?}}", "", dep).strip()
             if not dep:
                 continue
             if dep.startswith("-r") and recursive:
