@@ -4,5 +4,5 @@ pylint==2.12.2
 pytest==6.2.5
 setuptools==59.5.0
 tox==3.24.4
-twine==3.7.0
+twine==3.7.1
 wheel==0.37.0
