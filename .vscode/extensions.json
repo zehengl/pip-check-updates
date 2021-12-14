@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "coenraads.bracket-pair-colorizer",
     "davidanson.vscode-markdownlint",
     "eamodio.gitlens",
     "esbenp.prettier-vscode",

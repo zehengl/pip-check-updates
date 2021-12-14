@@ -1,6 +1,8 @@
 {
   "autoDocstring.docstringFormat": "google",
+  "editor.bracketPairColorization.enabled": true,
   "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
   "editor.minimap.enabled": false,
   "editor.rulers": [88, 120],
   "files.insertFinalNewline": true,
