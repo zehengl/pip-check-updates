@@ -1,11 +1,10 @@
 <div align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
     <img src="https://cdn2.iconfinder.com/data/icons/flat-jewels-icon-set/512/0000_Refresh.png" alt="logo" height="196">
 </div>
 
 # pip-check-updates
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
 [![pytest](https://github.com/zehengl/pip-check-updates/actions/workflows/pytest.yml/badge.svg)](https://github.com/zehengl/pip-check-updates/actions/workflows/pytest.yml)
 ![coding_style](https://img.shields.io/badge/code%20style-black-000000.svg)
@@ -13,6 +12,9 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pip-check-updates)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/pip-check-updates)
 [![Downloads](https://pepy.tech/badge/pip-check-updates)](https://pepy.tech/project/pip-check-updates)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A tool to upgrade dependencies to the latest versions, inspired by [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
 
