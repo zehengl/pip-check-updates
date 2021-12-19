@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ghostebony",
+      "name": "Pedro Américo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47510020?v=4",
+      "profile": "https://github.com/ghostebony",
+      "contributions": [
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "pip-check-updates",
+  "projectOwner": "zehengl",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
