@@ -122,7 +122,7 @@ def run():
     for path, name, current_version, op in tqdm(
         deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output or not deps
     ):
-        latest_version = get_latest_version(name, no_ssl_verify)
+        latest_version = get_latest_version(name.partition("[")[0], no_ssl_verify)
         change = compare_versions(current_version, latest_version)
 
         if any(
