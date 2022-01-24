@@ -12,9 +12,7 @@
 [![Downloads](https://pepy.tech/badge/pip-check-updates)](https://pepy.tech/project/pip-check-updates)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A tool to upgrade dependencies to the latest versions, inspired by [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
@@ -175,6 +173,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/ghostebony"><img src="https://avatars.githubusercontent.com/u/47510020?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pedro Américo</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aghostebony" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="http://kodare.net"><img src="https://avatars.githubusercontent.com/u/332428?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anders Hovmöller</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aboxed" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
