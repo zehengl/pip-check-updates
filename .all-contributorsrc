@@ -13,6 +13,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "boxed",
+      "name": "Anders Hovmöller",
+      "avatar_url": "https://avatars.githubusercontent.com/u/332428?v=4",
+      "profile": "http://kodare.net",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
