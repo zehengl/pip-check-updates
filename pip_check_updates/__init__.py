@@ -58,7 +58,12 @@ def load_dependencies(path="requirements.txt", recursive=True):
             if not dep:
                 continue
             if dep.startswith("-r") and recursive:
-                deps.extend(load_dependencies(p.parent / dep.split()[-1], recursive))
+                deps.extend(
+                    load_dependencies(
+                        p.parent / dep.partition("-r")[-1].strip(),
+                        recursive,
+                    )
+                )
                 continue
             if dep.startswith("-f"):
                 continue
