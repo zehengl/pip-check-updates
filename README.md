@@ -173,7 +173,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/ghostebony"><img src="https://avatars.githubusercontent.com/u/47510020?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pedro Américo</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aghostebony" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/ghostebony"><img src="https://avatars.githubusercontent.com/u/47510020?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pedro Américo</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aghostebony" title="Bug reports">🐛</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=ghostebony" title="Code">💻</a></td>
     <td align="center"><a href="http://kodare.net"><img src="https://avatars.githubusercontent.com/u/332428?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anders Hovmöller</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aboxed" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://jtiai.github.io/"><img src="https://avatars.githubusercontent.com/u/1370289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jani Tiainen</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Ajtiai" title="Bug reports">🐛</a></td>
   </tr>
