@@ -68,6 +68,12 @@ def get_args():
         default=False,
         help="disable recursive checking.",
     )
+    parser.add_argument(
+        "--ignore_warning",
+        action="store_true",
+        default=False,
+        help="ignore warning.",
+    )
 
     args = parser.parse_args()
 
@@ -98,6 +104,7 @@ def run():
     txt_output = args.txt
     interactive = args.interactive
     no_recursive = args.no_recursive
+    ignore_warning = args.ignore_warning
 
     if upgrade and txt_output:
         print("Oops, cannot specify both -u and -x. Please pick one.")
@@ -119,10 +126,14 @@ def run():
         ignores = []
 
     results = {}
+    errors = []
     for path, name, current_version, op in tqdm(
         deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output or not deps
     ):
         latest_version = get_latest_version(name.partition("[")[0], no_ssl_verify)
+        if latest_version is None:
+            errors.append(name)
+            continue
         change = compare_versions(current_version, latest_version)
 
         if any(
@@ -231,6 +242,13 @@ def run():
             print()
             print(content.strip())
             print()
+
+    if not ignore_warning:
+        print()
+        libs = ", ".join(errors)
+        print(
+            Fore.YELLOW + f"WARNING: could not find {libs} on PyPI." + Style.RESET_ALL
+        )
 
 
 if __name__ == "__main__":
