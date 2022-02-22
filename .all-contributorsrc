@@ -22,6 +22,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "jtiai",
+      "name": "Jani Tiainen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1370289?v=4",
+      "profile": "https://jtiai.github.io/",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
