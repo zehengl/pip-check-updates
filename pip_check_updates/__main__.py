@@ -243,7 +243,7 @@ def run():
             print(content.strip())
             print()
 
-    if not ignore_warning:
+    if not ignore_warning and errors:
         print()
         libs = ", ".join(errors)
         print(
