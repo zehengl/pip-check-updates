@@ -74,6 +74,12 @@ def get_args():
         default=False,
         help="ignore warning.",
     )
+    parser.add_argument(
+        "--show_full_path",
+        action="store_true",
+        default=False,
+        help="show full path.",
+    )
 
     args = parser.parse_args()
 
@@ -105,6 +111,7 @@ def run():
     interactive = args.interactive
     no_recursive = args.no_recursive
     ignore_warning = args.ignore_warning
+    show_full_path = args.show_full_path
 
     if upgrade and txt_output:
         print("Oops, cannot specify both -u and -x. Please pick one.")
@@ -185,7 +192,8 @@ def run():
     if results and not txt_output:
         print()
         for path in results:
-            print("In", Fore.BLUE + path + Style.RESET_ALL)
+            _path = str(path) if show_full_path else path.name
+            print("In", Fore.BLUE + _path + Style.RESET_ALL)
             print()
 
             table = []
@@ -203,7 +211,6 @@ def run():
 
             print()
 
-        styled_path = [Fore.BLUE + key + Style.RESET_ALL for key in results.keys()]
         if upgrade:
             print(
                 "Run",
@@ -213,9 +220,9 @@ def run():
         else:
             print(
                 "Run",
-                Fore.YELLOW + "pcu -u" + Style.RESET_ALL,
-                "to upgrade",
-                f"{' and '.join(styled_path)}",
+                Fore.YELLOW + f"pcu {req_path} -u" + Style.RESET_ALL,
+                "to upgrade versions",
+                f"in {len(results)} file{'s' if len(results) > 1 else ''}",
             )
     elif not txt_output:
         print()

@@ -69,7 +69,7 @@ def load_dependencies(path="requirements.txt", recursive=True):
                 continue
             try:
                 name, current_version, op = get_current_version(dep)
-                deps.append([str(p), name, current_version, op])
+                deps.append([p, name, current_version, op])
             except:
                 pass
 
