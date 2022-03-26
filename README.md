@@ -136,7 +136,9 @@ Show the helper text:
 pcu -h
 ```
 
-    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify] [--no_recursive] [--ignore_warning] [path]
+    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i]
+           [--no_ssl_verify] [--no_recursive] [--ignore_warning] [--show_full_path]
+           [path]
 
     pip-check-updates.
 
@@ -155,6 +157,7 @@ pcu -h
     --no_ssl_verify       disable SSL verification.
     --no_recursive        disable recursive checking.
     --ignore_warning      ignore warning.
+    --show_full_path      show full path.
 
 ## Test
 
