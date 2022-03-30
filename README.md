@@ -159,6 +159,12 @@ pcu -h
     --ignore_warning      ignore warning.
     --show_full_path      show full path.
 
+Work with conda (WIP):
+
+```terminal
+pcu environment.yml -u
+```
+
 ## Test
 
     python setup.py test
