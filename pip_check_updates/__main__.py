@@ -113,6 +113,9 @@ def run():
     ignore_warning = args.ignore_warning
     show_full_path = args.show_full_path
 
+    is_txt = req_path.endswith(".txt")
+    is_yml = req_path.endswith(".yml") or req_path.endswith(".yaml")
+
     if upgrade and txt_output:
         print("Oops, cannot specify both -u and -x. Please pick one.")
         return
@@ -212,11 +215,20 @@ def run():
             print()
 
         if upgrade:
-            print(
-                "Run",
-                Fore.YELLOW + f"pip install -r {req_path}" + Style.RESET_ALL,
-                "to install new versions",
-            )
+            if is_txt:
+                print(
+                    "Run",
+                    Fore.YELLOW + f"pip install -r {req_path}" + Style.RESET_ALL,
+                    "to install new versions",
+                )
+            elif is_yml:
+                conda_cmd = "conda env update --prefix ./venv --prune"
+                print(
+                    "Run",
+                    Fore.YELLOW + f"{conda_cmd} --file {req_path}" + Style.RESET_ALL,
+                    "to upgrade versions",
+                    "\n(assuming you have a local conda environment named 'venv')",
+                )
         else:
             print(
                 "Run",
@@ -224,6 +236,7 @@ def run():
                 "to upgrade versions",
                 f"in {len(results)} file{'s' if len(results) > 1 else ''}",
             )
+
     elif not txt_output:
         print()
         print(

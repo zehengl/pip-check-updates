@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 
 import requests
+import yaml
 
 
 def get_latest_version(name, no_ssl_verify):
@@ -47,31 +48,59 @@ def compare_versions(current_version, latest_version):
     return "other"
 
 
+def load_txt(deps, f, p, recursive):
+    for dep in f.read().splitlines():
+        dep = re.sub(r"#.*", "", dep).strip()
+        dep = re.sub(r"{%.*?%}", "", dep).strip()
+        dep = re.sub(r"{{.*?}}", "", dep).strip()
+        if not dep:
+            continue
+        if dep.startswith("-r") and recursive:
+            deps.extend(
+                load_dependencies(
+                    p.parent / dep.partition("-r")[-1].strip(),
+                    recursive,
+                )
+            )
+            continue
+        if dep.startswith("-f"):
+            continue
+        try:
+            name, current_version, op = get_current_version(dep)
+            deps.append([p, name, current_version, op])
+        except:
+            pass
+
+
+def load_yaml(deps, f, p):
+    config = yaml.safe_load(f)
+    dependencies = config.get("dependencies", [])
+    for val in dependencies:
+        if type(val) is dict:
+            for dep in val.get("pip", []):
+                try:
+                    name, current_version, op = get_current_version(dep)
+                    deps.append([p, name, current_version, op])
+                except:
+                    pass
+
+
+def load_toml(deps, f, p):
+    raise NotImplementedError("Pipfile support is not implemented yet")
+
+
 def load_dependencies(path="requirements.txt", recursive=True):
     p = Path(path).resolve()
     deps = []
     with open(p) as f:
-        for dep in f.read().splitlines():
-            dep = re.sub(r"#.*", "", dep).strip()
-            dep = re.sub(r"{%.*?%}", "", dep).strip()
-            dep = re.sub(r"{{.*?}}", "", dep).strip()
-            if not dep:
-                continue
-            if dep.startswith("-r") and recursive:
-                deps.extend(
-                    load_dependencies(
-                        p.parent / dep.partition("-r")[-1].strip(),
-                        recursive,
-                    )
-                )
-                continue
-            if dep.startswith("-f"):
-                continue
-            try:
-                name, current_version, op = get_current_version(dep)
-                deps.append([p, name, current_version, op])
-            except:
-                pass
+        if p.suffix == ".txt":
+            load_txt(deps, f, p, recursive)
+        elif p.suffix in [".yml", ".yaml"]:
+            load_yaml(deps, f, p)
+        elif p.name == "Pipfile":
+            load_toml(deps, f, p)
+        else:
+            raise RuntimeError(f"Unknown file: {p.name}")
 
     deps = list(dep for dep, _ in itertools.groupby(deps))
 
