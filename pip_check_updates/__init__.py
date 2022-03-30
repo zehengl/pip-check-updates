@@ -4,13 +4,27 @@ from pathlib import Path
 
 import requests
 import yaml
+from bs4 import BeautifulSoup
 
 
-def get_latest_version(name, no_ssl_verify):
-    r = requests.get(f"https://pypi.org/pypi/{name}/json", verify=not no_ssl_verify)
-    if r.status_code == 200:
-        version = r.json()["info"]["version"]
-        return version
+def get_latest_version(name, source, no_ssl_verify):
+    if source == "pypi":
+        r = requests.get(f"https://pypi.org/pypi/{name}/json", verify=not no_ssl_verify)
+        if r.status_code == 200:
+            version = r.json()["info"]["version"]
+            return version
+    elif source == "conda":
+        r = requests.get(
+            f"https://anaconda.org/conda-forge/{name}", verify=not no_ssl_verify
+        )
+        if r.status_code == 200:
+            soup = BeautifulSoup(r.content, "html.parser")
+            smalls = soup.find_all("small", {"class": "subheader"})
+            if smalls:
+                version = smalls[0].text
+            else:
+                version = None
+            return version
     return None
 
 
@@ -67,7 +81,7 @@ def load_txt(deps, f, p, recursive):
             continue
         try:
             name, current_version, op = get_current_version(dep)
-            deps.append([p, name, current_version, op])
+            deps.append([p, name, current_version, op, "pypi"])
         except:
             pass
 
@@ -75,14 +89,22 @@ def load_txt(deps, f, p, recursive):
 def load_yaml(deps, f, p):
     config = yaml.safe_load(f)
     dependencies = config.get("dependencies", [])
+    results = {
+        "pypi": [],
+        "conda": [],
+    }
     for val in dependencies:
+        if type(val) is str:
+            results["conda"].append(val)
         if type(val) is dict:
-            for dep in val.get("pip", []):
-                try:
-                    name, current_version, op = get_current_version(dep)
-                    deps.append([p, name, current_version, op])
-                except:
-                    pass
+            results["pypi"].extend(val.get("pip", []))
+    for source in results:
+        for dep in results[source]:
+            try:
+                name, current_version, op = get_current_version(dep)
+                deps.append([p, name, current_version, op, source])
+            except:
+                pass
 
 
 def load_toml(deps, f, p):

@@ -136,13 +136,17 @@ def run():
         ignores = []
 
     results = {}
-    errors = []
-    for path, name, current_version, op in tqdm(
+    errors = {}
+    for path, name, current_version, op, source in tqdm(
         deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output or not deps
     ):
-        latest_version = get_latest_version(name.partition("[")[0], no_ssl_verify)
+        latest_version = get_latest_version(
+            name.partition("[")[0], source, no_ssl_verify
+        )
         if latest_version is None:
-            errors.append(name)
+            if source not in errors:
+                errors[source] = []
+            errors[source].append(name)
             continue
         change = compare_versions(current_version, latest_version)
 
@@ -265,10 +269,17 @@ def run():
 
     if not ignore_warning and errors:
         print()
-        libs = ", ".join(errors)
-        print(
-            Fore.YELLOW + f"WARNING: could not find {libs} on PyPI." + Style.RESET_ALL
-        )
+        mapping = {
+            "pypi": "PyPI",
+            "conda": "conda-forge",
+        }
+        for source, libs in errors.items():
+            libs = ", ".join(libs)
+            print(
+                Fore.YELLOW
+                + f"WARNING: could not find {libs} on {mapping[source]}."
+                + Style.RESET_ALL
+            )
 
 
 if __name__ == "__main__":
