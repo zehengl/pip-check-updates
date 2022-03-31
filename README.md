@@ -53,7 +53,7 @@ pcu
     pandas  0.25.3  →  1.3.2
     Django  3.1.13  →  3.2.6
 
-    Run pcu -u to upgrade requirements.txt
+    Run pcu requirements.txt -u to upgrade versions in 1 file
 
 Upgrade a project's requirements file:
 
@@ -93,7 +93,7 @@ pcu requirements-dev.txt
     pylint  2.9.3   →  2.9.6
     pytest  5.4.3   →  6.2.4
 
-    Run pcu -u to upgrade requirements.txt and requirements-dev.txt
+    Run pcu requirements-dev.txt -u to upgrade versions in 2 files
 
 Target version:
 
@@ -112,7 +112,7 @@ pcu requirements-dev.txt -t patch
 
     pylint  2.9.3  →  2.9.6
 
-    Run pcu -u to upgrade requirements.txt and requirements-dev.txt
+    Run pcu requirements-dev.txt -u to upgrade versions in 2 files
 
 Filter by a pattern:
 
@@ -128,7 +128,7 @@ pcu requirements-dev.txt -f "py*"
     pylint  2.9.3  →  2.9.6
     pytest  5.4.3  →  6.2.4
 
-    Run pcu -u to upgrade requirements-dev.txt
+    Run pcu requirements-dev.txt -u to upgrade versions in 1 file
 
 Show the helper text:
 
