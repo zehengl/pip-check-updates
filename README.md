@@ -130,6 +130,18 @@ pcu requirements-dev.txt -f "py*"
 
     Run pcu requirements-dev.txt -u to upgrade versions in 1 file
 
+Work with conda-forge (WIP):
+
+```terminal
+pcu environment.yml -u
+```
+
+Work with Pipenv (WIP)
+
+```terminal
+pcu Pipfile
+```
+
 Show the helper text:
 
 ```terminal
@@ -159,11 +171,7 @@ pcu -h
     --ignore_warning      ignore warning.
     --show_full_path      show full path.
 
-Work with conda-forge (WIP):
 
-```terminal
-pcu environment.yml -u
-```
 
 ## Test
 

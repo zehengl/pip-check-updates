@@ -115,6 +115,7 @@ def run():
 
     is_txt = req_path.endswith(".txt")
     is_yml = req_path.endswith(".yml") or req_path.endswith(".yaml")
+    is_toml = req_path == "Pipfile"
 
     if upgrade and txt_output:
         print("Oops, cannot specify both -u and -x. Please pick one.")
@@ -234,12 +235,13 @@ def run():
                     "\n(assuming you have a local conda environment named 'venv')",
                 )
         else:
-            print(
-                "Run",
-                Fore.YELLOW + f"pcu {req_path} -u" + Style.RESET_ALL,
-                "to upgrade versions",
-                f"in {len(results)} file{'s' if len(results) > 1 else ''}",
-            )
+            if not is_toml:
+                print(
+                    "Run",
+                    Fore.YELLOW + f"pcu {req_path} -u" + Style.RESET_ALL,
+                    "to upgrade versions",
+                    f"in {len(results)} file{'s' if len(results) > 1 else ''}",
+                )
 
     elif not txt_output:
         print()
@@ -248,24 +250,25 @@ def run():
             Fore.GREEN + ":)" + Style.RESET_ALL,
         )
 
-    for path in results:
-        with open(path) as f:
-            content = f.read()
-        for name, current_version, latest_version, _, op in results[path]:
-            content = content.replace(
-                f"{name}{op}{current_version}",
-                f"{name}{op}{latest_version}",
-            )
+    if not is_toml:
+        for path in results:
+            with open(path) as f:
+                content = f.read()
+            for name, current_version, latest_version, _, op in results[path]:
+                content = content.replace(
+                    f"{name}{op}{current_version}",
+                    f"{name}{op}{latest_version}",
+                )
 
-        if upgrade:
-            with open(path, "w") as f:
-                f.write(content)
+            if upgrade:
+                with open(path, "w") as f:
+                    f.write(content)
 
-        if txt_output:
-            print("For", Fore.BLUE + path + Style.RESET_ALL)
-            print()
-            print(content.strip())
-            print()
+            if txt_output:
+                print("For", Fore.BLUE + path + Style.RESET_ALL)
+                print()
+                print(content.strip())
+                print()
 
     if not ignore_warning and errors:
         print()

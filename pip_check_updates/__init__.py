@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 
 import requests
+import toml
 import yaml
 from bs4 import BeautifulSoup
 
@@ -108,7 +109,27 @@ def load_yaml(deps, f, p):
 
 
 def load_toml(deps, f, p):
-    raise NotImplementedError("Pipfile support is not implemented yet")
+    config = toml.load(f)
+    packages = list(config.get("packages", {}).items())
+    dev_packages = list(config.get("dev-packages", {}).items())
+    dependencies = packages + dev_packages
+    results = []
+    for key, val in dependencies:
+        if type(val) is str:
+            if val == "*":
+                continue
+            results.append(f"{key}{val}")
+        elif "version" in val:
+            if val["version"] == "*":
+                continue
+            results.append(f"{key}{val['version']}")
+
+    for dep in results:
+        try:
+            name, current_version, op = get_current_version(dep)
+            deps.append([p, name, current_version, op, "pypi"])
+        except:
+            pass
 
 
 def load_dependencies(path="requirements.txt", recursive=True):
