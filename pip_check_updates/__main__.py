@@ -230,7 +230,7 @@ def run():
                 print(
                     "Run",
                     Fore.YELLOW + f"{conda_cmd} --file {req_path}" + Style.RESET_ALL,
-                    "to upgrade versions",
+                    "to install new versions",
                     "\n(assuming you have a local conda environment named 'venv')",
                 )
         else:
