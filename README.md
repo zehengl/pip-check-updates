@@ -66,9 +66,9 @@ pcu -u
 
     In requirements.txt
 
-    tqdm    4.62.0  →  4.62.1
-    pandas  0.25.3  →  1.3.2
     Django  3.1.13  →  3.2.6
+    pandas  0.25.3  →  1.3.2
+    tqdm    4.62.0  →  4.62.1
 
     Run pip install -r requirements.txt to install new versions
 
@@ -83,9 +83,9 @@ pcu requirements-dev.txt
 
     In requirements.txt
 
-    tqdm    4.62.0  →  4.62.1
-    pandas  0.25.3  →  1.3.2
     Django  3.1.13  →  3.2.6
+    pandas  0.25.3  →  1.3.2
+    tqdm    4.62.0  →  4.62.1
 
     In requirements-dev.txt
 
@@ -169,8 +169,6 @@ pcu -h
     --ignore_warning      ignore warning.
     --show_full_path      show full path.
     --no_color            disable color.
-
-
 
 ## Test
 
