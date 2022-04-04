@@ -148,9 +148,7 @@ Show the helper text:
 pcu -h
 ```
 
-    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i]
-           [--no_ssl_verify] [--no_recursive] [--ignore_warning] [--show_full_path]
-           [path]
+    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify] [--no_recursive] [--ignore_warning] [--show_full_path] [--no_color] [path]
 
     pip-check-updates.
 
@@ -170,6 +168,7 @@ pcu -h
     --no_recursive        disable recursive checking.
     --ignore_warning      ignore warning.
     --show_full_path      show full path.
+    --no_color            disable color.
 
 
 
