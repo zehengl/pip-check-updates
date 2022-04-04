@@ -1,118 +1,14 @@
-import argparse
-import fnmatch
-import re
 from pathlib import Path
 
 import urllib3
-from colorama import Fore, Style, init
+from colorama import init
 from tabulate import tabulate
 from tqdm import tqdm
 
 from . import compare_versions, get_latest_version, load_dependencies
-
-
-def is_a_match(pattern, name):
-    return re.compile(fnmatch.translate(pattern)).match(name) is not None
-
-
-def get_args():
-    parser = argparse.ArgumentParser(description="pip-check-updates.")
-    parser.add_argument(
-        "path",
-        nargs="?",
-        default="requirements.txt",
-        help="specify path to a requirements file",
-    )
-    parser.add_argument(
-        "-u",
-        "--upgrade",
-        action="store_true",
-        default=False,
-        help="overwrite package file with upgraded versions instead of just outputting to console.",
-    )
-    parser.add_argument(
-        "-f",
-        "--filter",
-        nargs="+",
-        help="include only package names matching the given strings.",
-    )
-    parser.add_argument(
-        "-t",
-        "--target",
-        choices=["latest", "newest", "greatest", "minor", "patch"],
-        help="target version to upgrade to: latest, newest, greatest, minor, patch.",
-    )
-    parser.add_argument(
-        "-x",
-        "--txt",
-        action="store_true",
-        default=False,
-        help="output new requirements file instead of human-readable message.",
-    )
-    parser.add_argument(
-        "-i",
-        "--interactive",
-        action="store_true",
-        default=False,
-        help="enable interactive prompts for each dependency.",
-    )
-    parser.add_argument(
-        "--no_ssl_verify",
-        action="store_true",
-        default=False,
-        help="disable SSL verification.",
-    )
-    parser.add_argument(
-        "--no_recursive",
-        action="store_true",
-        default=False,
-        help="disable recursive checking.",
-    )
-    parser.add_argument(
-        "--ignore_warning",
-        action="store_true",
-        default=False,
-        help="ignore warning.",
-    )
-    parser.add_argument(
-        "--show_full_path",
-        action="store_true",
-        default=False,
-        help="show full path.",
-    )
-    parser.add_argument(
-        "--no_color",
-        action="store_true",
-        default=False,
-        help="disable color.",
-    )
-
-    args = parser.parse_args()
-
-    return args
-
-
-def styled_text(text, category, no_color):
-    if no_color:
-        return text
-
-    mapping = {
-        "major": Fore.RED,
-        "minor": Fore.CYAN,
-        "patch": Fore.GREEN,
-        "other": Fore.MAGENTA,
-        "info": Fore.BLUE,
-        "cmd": Fore.YELLOW,
-        "warning": Fore.YELLOW,
-        "success": Fore.GREEN,
-    }
-
-    color = mapping.get(category)
-
-    if color:
-        return color + text + Style.RESET_ALL
-
-    return text
+from .args import get_args
+from .filter import is_a_match
+from .style import styled_text
 
 
 def run():

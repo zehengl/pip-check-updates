@@ -22,7 +22,7 @@ setup(
     install_requires=requirements,
     setup_requires=["setuptools_scm", "pytest-runner"],
     use_scm_version=True,
-    tests_require=["pytest"],
+    tests_require=["pytest", "pytest-mock"],
     test_suite="tests",
     author="Zeheng Li",
     author_email="imzehengl@gmail.com",
