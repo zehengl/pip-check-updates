@@ -80,21 +80,39 @@ def get_args():
         default=False,
         help="show full path.",
     )
+    parser.add_argument(
+        "--no_color",
+        action="store_true",
+        default=False,
+        help="disable color.",
+    )
 
     args = parser.parse_args()
 
     return args
 
 
-def styled_version(latest_version, change):
+def styled_text(text, category, no_color):
+    if no_color:
+        return text
+
     mapping = {
         "major": Fore.RED,
         "minor": Fore.CYAN,
         "patch": Fore.GREEN,
         "other": Fore.MAGENTA,
+        "info": Fore.BLUE,
+        "cmd": Fore.YELLOW,
+        "warning": Fore.YELLOW,
+        "success": Fore.GREEN,
     }
 
-    return mapping[change] + latest_version + Style.RESET_ALL
+    color = mapping.get(category)
+
+    if color:
+        return color + text + Style.RESET_ALL
+
+    return text
 
 
 def run():
@@ -112,6 +130,7 @@ def run():
     no_recursive = args.no_recursive
     ignore_warning = args.ignore_warning
     show_full_path = args.show_full_path
+    no_color = args.no_color
 
     is_txt = req_path.endswith(".txt")
     is_yml = req_path.endswith(".yml") or req_path.endswith(".yaml")
@@ -175,6 +194,9 @@ def run():
             ]
         )
 
+    for path in results:
+        results[path].sort(key=lambda x: x[0])
+
     if interactive:
         for path in results:
             for t in results[path]:
@@ -182,7 +204,7 @@ def run():
                 prompt = (
                     "Do you want to upgrade: "
                     f"{name} {current_version} → "
-                    f"{styled_version(latest_version, change)}? "
+                    f"{styled_text(latest_version, change, no_color)}? "
                 )
                 answer = input(prompt)
                 t.append(answer.lower() in ["y", "yes"])
@@ -201,7 +223,7 @@ def run():
         print()
         for path in results:
             _path = str(path) if show_full_path else path.name
-            print("In", Fore.BLUE + _path + Style.RESET_ALL)
+            print("In", styled_text(_path, "info", no_color))
             print()
 
             table = []
@@ -211,7 +233,7 @@ def run():
                         name,
                         current_version,
                         "→",
-                        styled_version(latest_version, change),
+                        styled_text(latest_version, change, no_color),
                     )
                 )
 
@@ -221,24 +243,27 @@ def run():
 
         if upgrade:
             if is_txt:
+                cmd = f"pip install -r {req_path}"
                 print(
                     "Run",
-                    Fore.YELLOW + f"pip install -r {req_path}" + Style.RESET_ALL,
+                    styled_text(cmd, "cmd", no_color),
                     "to install new versions",
                 )
             elif is_yml:
                 conda_cmd = "conda env update --prefix ./venv --prune"
+                cmd = f"{conda_cmd} --file {req_path}"
                 print(
                     "Run",
-                    Fore.YELLOW + f"{conda_cmd} --file {req_path}" + Style.RESET_ALL,
+                    styled_text(cmd, "cmd", no_color),
                     "to install new versions",
                     "\n(assuming you have a local conda environment named 'venv')",
                 )
         else:
             if not is_toml:
+                cmd = f"pcu {req_path} -u"
                 print(
                     "Run",
-                    Fore.YELLOW + f"pcu {req_path} -u" + Style.RESET_ALL,
+                    styled_text(cmd, "cmd", no_color),
                     "to upgrade versions",
                     f"in {len(results)} file{'s' if len(results) > 1 else ''}",
                 )
@@ -247,7 +272,7 @@ def run():
         print()
         print(
             "All dependencies match the latest package versions",
-            Fore.GREEN + ":)" + Style.RESET_ALL,
+            styled_text(":)", "success", no_color),
         )
 
     if not is_toml:
@@ -265,7 +290,7 @@ def run():
                     f.write(content)
 
             if txt_output:
-                print("For", Fore.BLUE + path + Style.RESET_ALL)
+                print("For", styled_text(path, "info", no_color))
                 print()
                 print(content.strip())
                 print()
@@ -278,11 +303,8 @@ def run():
         }
         for source, libs in errors.items():
             libs = ", ".join(libs)
-            print(
-                Fore.YELLOW
-                + f"WARNING: could not find {libs} on {mapping[source]}."
-                + Style.RESET_ALL
-            )
+            message = f"WARNING: could not find {libs} on {mapping[source]}."
+            print(styled_text(message, "warning", no_color))
 
 
 if __name__ == "__main__":
