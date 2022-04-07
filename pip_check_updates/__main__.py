@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 from . import compare_versions, get_latest_version, load_dependencies
 from .args import get_args
+from .config import read, init_config
 from .filter import is_a_match
 from .style import styled_text
 
@@ -15,22 +16,32 @@ def run():
 
     init()
 
+    pcu_config = read()
+
     args = get_args()
     req_path = args.path
-    upgrade = args.upgrade
-    target = args.target
-    no_ssl_verify = args.no_ssl_verify
-    filter_ = args.filter
+    upgrade = args.upgrade or pcu_config.get("upgrade", False)
+    target = args.target or pcu_config.get("target", None)
+    no_ssl_verify = args.no_ssl_verify or pcu_config.get("target", False)
+    filter_ = args.filter or pcu_config.get("filter", [])
     txt_output = args.txt
     interactive = args.interactive
-    no_recursive = args.no_recursive
-    ignore_warning = args.ignore_warning
-    show_full_path = args.show_full_path
-    no_color = args.no_color
+    no_recursive = args.no_recursive or pcu_config.get("no_recursive", False)
+    ignore_warning = args.ignore_warning or pcu_config.get("ignore_warning", False)
+    show_full_path = args.show_full_path or pcu_config.get("show_full_path", False)
+    no_color = args.no_color or pcu_config.get("no_color", False)
+    init_ = args.init
+
+    if init_:
+        init_config()
 
     is_txt = req_path.endswith(".txt")
     is_yml = req_path.endswith(".yml") or req_path.endswith(".yaml")
     is_toml = req_path == "Pipfile"
+
+    if Path(".pcuignore").exists():
+        message = "Please use pcufile.toml instead.\n"
+        print(styled_text(message, "warning", no_color))
 
     if upgrade and txt_output:
         print("Oops, cannot specify both -u and -x. Please pick one.")
@@ -45,11 +56,7 @@ def run():
         action = "Upgrading" if upgrade else "Checking"
         print(f"{action} dependencies")
 
-    if Path(".pcuignore").exists():
-        with open(".pcuignore") as f:
-            ignores = [pattern.strip() for pattern in f.readlines()]
-    else:
-        ignores = []
+    ignores = pcu_config.get("ignores", [])
 
     results = {}
     errors = {}

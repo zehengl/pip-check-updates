@@ -72,6 +72,12 @@ def get_args():
         default=False,
         help="disable color.",
     )
+    parser.add_argument(
+        "--init",
+        action="store_true",
+        default=False,
+        help="initialize pcufile.toml.",
+    )
 
     args = parser.parse_args()
 

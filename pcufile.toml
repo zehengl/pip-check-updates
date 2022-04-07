@@ -1,0 +1,10 @@
+target = "latest"
+no_ssl_verify = false
+ignore_warning = false
+show_full_path = false
+upgrade = false
+no_color = false
+filter = [
+]
+ignores =[
+]
