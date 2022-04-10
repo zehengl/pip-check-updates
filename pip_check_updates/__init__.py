@@ -14,18 +14,19 @@ def get_latest_version(name, source, no_ssl_verify):
         if r.status_code == 200:
             version = r.json()["info"]["version"]
             return version
-    elif source == "conda":
-        r = requests.get(
-            f"https://anaconda.org/conda-forge/{name}", verify=not no_ssl_verify
-        )
-        if r.status_code == 200:
-            soup = BeautifulSoup(r.content, "html.parser")
-            smalls = soup.find_all("small", {"class": "subheader"})
-            if smalls:
-                version = smalls[0].text
-            else:
-                version = None
-            return version
+    elif type(source) is list:
+        version = None
+        for channel in source:
+            r = requests.get(
+                f"https://anaconda.org/{channel}/{name}", verify=not no_ssl_verify
+            )
+            if r.status_code == 200:
+                soup = BeautifulSoup(r.content, "html.parser")
+                smalls = soup.find_all("small", {"class": "subheader"})
+                if smalls:
+                    version = smalls[0].text
+                    break
+        return version
     return None
 
 
@@ -90,6 +91,7 @@ def load_txt(deps, f, p, recursive):
 def load_yaml(deps, f, p):
     config = yaml.safe_load(f)
     dependencies = config.get("dependencies", [])
+    channels = config.get("channels", ["conda-forge"])
     results = {
         "pypi": [],
         "conda": [],
@@ -103,6 +105,8 @@ def load_yaml(deps, f, p):
         for dep in results[source]:
             try:
                 name, current_version, op = get_current_version(dep)
+                if source == "conda":
+                    source = channels
                 deps.append([p, name, current_version, op, source])
             except:
                 pass

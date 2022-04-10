@@ -67,6 +67,8 @@ def run():
             name.partition("[")[0], source, no_ssl_verify
         )
         if latest_version is None:
+            if type(source) is list:
+                source = ", ".join(source)
             if source not in errors:
                 errors[source] = []
             errors[source].append(name)
@@ -193,20 +195,22 @@ def run():
                     f.write(content)
 
             if txt_output:
-                print("For", styled_text(path, "info", no_color))
+                _path = str(path) if show_full_path else path.name
+                print("For", styled_text(_path, "info", no_color))
                 print()
                 print(content.strip())
                 print()
 
     if not ignore_warning and errors:
         print()
-        mapping = {
-            "pypi": "PyPI",
-            "conda": "conda-forge",
-        }
         for source, libs in errors.items():
             libs = ", ".join(libs)
-            message = f"WARNING: could not find {libs} on {mapping[source]}."
+            if source == "pypi":
+                source = "PyPI"
+            elif ", " in source:
+                s = "s" if len(source.split(", ")) > 1 else ""
+                source = f"channel{s}: {source}"
+            message = f"WARNING: could not find {libs} on {source}."
             print(styled_text(message, "warning", no_color))
 
 
