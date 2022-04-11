@@ -22,7 +22,7 @@ def run():
     req_path = args.path
     upgrade = args.upgrade or pcu_config.get("upgrade", False)
     target = args.target or pcu_config.get("target", None)
-    no_ssl_verify = args.no_ssl_verify or pcu_config.get("target", False)
+    no_ssl_verify = args.no_ssl_verify or pcu_config.get("no_ssl_verify", False)
     filter_ = args.filter or pcu_config.get("filter", [])
     txt_output = args.txt
     interactive = args.interactive
