@@ -112,7 +112,7 @@ def load_yaml(deps, f, p):
                 pass
 
 
-def load_toml(deps, f, p):
+def load_pipfile(deps, f, p):
     config = toml.load(f)
     packages = list(config.get("packages", {}).items())
     dev_packages = list(config.get("dev-packages", {}).items())
@@ -136,6 +136,31 @@ def load_toml(deps, f, p):
             pass
 
 
+def load_pyproject(deps, f, p):
+    config = toml.load(f)
+    poetry_config = config.get("tool", {}).get('poetry', {})
+    packages = list(poetry_config.get('dependencies', {}).items())
+    dev_packages = list(poetry_config.get("dev-dependencies", {}).items())
+    dependencies = packages + dev_packages
+
+    results = []
+    for key, val in dependencies:
+        if key == 'python':
+            continue
+
+        if type(val) is str:
+            if val == "*":
+                continue
+            results.append(f"{key}=={val}")
+
+    for dep in results:
+        try:
+            name, current_version, op = get_current_version(dep)
+            deps.append([p, name, current_version, op, "pypi"])
+        except:
+            pass
+
+
 def load_dependencies(path="requirements.txt", recursive=True):
     p = Path(path).resolve()
     deps = []
@@ -145,7 +170,9 @@ def load_dependencies(path="requirements.txt", recursive=True):
         elif p.suffix in [".yml", ".yaml"]:
             load_yaml(deps, f, p)
         elif p.name == "Pipfile":
-            load_toml(deps, f, p)
+            load_pipfile(deps, f, p)
+        elif p.name == "pyproject.toml":
+            load_pyproject(deps, f, p)
         else:
             raise RuntimeError(f"Unknown file: {p.name}")
 
