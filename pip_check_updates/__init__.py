@@ -31,7 +31,7 @@ def get_latest_version(name, source, no_ssl_verify):
 
 
 def get_current_version(dep):
-    name, current_version = [token for token in re.split(r"[><=~!]", dep) if token]
+    name, current_version = [token for token in re.split(r"[><=~!^]", dep) if token]
     op = dep[len(name) : -len(current_version)]
     return name, current_version, op
 
@@ -117,7 +117,6 @@ def load_toml(deps, f, p, poetry=False):
     if poetry:
         config = config.get("tool", {}).get("poetry", {})
     separator = "==" if poetry else ""
-
     package_key = "dependencies" if poetry else "packages"
     packages = list(config.get(package_key, {}).items())
     dev_packages = list(config.get(f"dev-{package_key}", {}).items())

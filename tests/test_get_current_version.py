@@ -13,6 +13,7 @@ from pip_check_updates import get_current_version
         ("a<1.0", "a", "1.0", "<"),
         ("a~=1.0", "a", "1.0", "~="),
         ("a!=1.0", "a", "1.0", "!="),
+        ("a^1.0", "a", "1.0", "^"),
     ],
 )
 def test_get_current_version(dep, name, version, op):
