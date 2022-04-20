@@ -112,52 +112,31 @@ def load_yaml(deps, f, p):
                 pass
 
 
-def load_pipfile(deps, f, p):
+def load_toml(deps, f, p, poetry=False):
     config = toml.load(f)
-    packages = list(config.get("packages", {}).items())
-    dev_packages = list(config.get("dev-packages", {}).items())
-    dependencies = packages + dev_packages
-    results = []
-    for key, val in dependencies:
-        if type(val) is str:
-            if val == "*":
-                continue
-            results.append(f"{key}{val}")
-        elif "version" in val:
-            if val["version"] == "*":
-                continue
-            results.append(f"{key}{val['version']}")
+    if poetry:
+        config = config.get("tool", {}).get("poetry", {})
+    separator = "==" if poetry else ""
 
-    for dep in results:
-        try:
-            name, current_version, op = get_current_version(dep)
-            deps.append([p, name, current_version, op, "pypi"])
-        except:
-            pass
-
-
-def load_pyproject(deps, f, p):
-    config = toml.load(f)
-    poetry_config = config.get("tool", {}).get('poetry', {})
-    packages = list(poetry_config.get('dependencies', {}).items())
-    dev_packages = list(poetry_config.get("dev-dependencies", {}).items())
+    package_key = "dependencies" if poetry else "packages"
+    packages = list(config.get(package_key, {}).items())
+    dev_packages = list(config.get(f"dev-{package_key}", {}).items())
     dependencies = packages + dev_packages
 
     results = []
     for key, val in dependencies:
-        if key == 'python':
+        if poetry and key == "python":
             # poetry requires a mandatory python version, which is not a valid pip package.
             # https://python-poetry.org/docs/pyproject/#dependencies-and-dev-dependencies
             continue
-
         if type(val) is str:
             if val == "*":
                 continue
-            results.append(f"{key}=={val}")
+            results.append(f"{key}{separator}{val}")
         elif "version" in val:
             if val["version"] == "*":
                 continue
-            results.append(f"{key}=={val['version']}")
+            results.append(f"{key}{separator}{val['version']}")
 
     for dep in results:
         try:
@@ -176,9 +155,9 @@ def load_dependencies(path="requirements.txt", recursive=True):
         elif p.suffix in [".yml", ".yaml"]:
             load_yaml(deps, f, p)
         elif p.name == "Pipfile":
-            load_pipfile(deps, f, p)
+            load_toml(deps, f, p)
         elif p.name == "pyproject.toml":
-            load_pyproject(deps, f, p)
+            load_toml(deps, f, p, poetry=True)
         else:
             raise RuntimeError(f"Unknown file: {p.name}")
 
