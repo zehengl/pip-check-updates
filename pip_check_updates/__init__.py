@@ -145,7 +145,9 @@ def load_pyproject(deps, f, p):
 
     results = []
     for key, val in dependencies:
-        if key == 'python':  # poetry allows python interpreter verion alongside deps
+        if key == 'python':
+            # poetry requires a mandatory python version, which is not a valid pip package.
+            # https://python-poetry.org/docs/pyproject/#dependencies-and-dev-dependencies
             continue
 
         if type(val) is str:
