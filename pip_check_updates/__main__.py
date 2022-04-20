@@ -37,7 +37,7 @@ def run():
 
     is_txt = req_path.endswith(".txt")
     is_yml = req_path.endswith(".yml") or req_path.endswith(".yaml")
-    is_toml = req_path == "Pipfile"
+    is_toml = req_path == "Pipfile" or req_path.endswith(".toml")
 
     if Path(".pcuignore").exists():
         message = "Please use pcufile.toml instead.\n"

@@ -31,7 +31,7 @@ def get_latest_version(name, source, no_ssl_verify):
 
 
 def get_current_version(dep):
-    name, current_version = [token for token in re.split(r"[><=~!]", dep) if token]
+    name, current_version = [token for token in re.split(r"[><=~!^]", dep) if token]
     op = dep[len(name) : -len(current_version)]
     return name, current_version, op
 
@@ -112,21 +112,30 @@ def load_yaml(deps, f, p):
                 pass
 
 
-def load_toml(deps, f, p):
+def load_toml(deps, f, p, poetry=False):
     config = toml.load(f)
-    packages = list(config.get("packages", {}).items())
-    dev_packages = list(config.get("dev-packages", {}).items())
+    if poetry:
+        config = config.get("tool", {}).get("poetry", {})
+    separator = "==" if poetry else ""
+    package_key = "dependencies" if poetry else "packages"
+    packages = list(config.get(package_key, {}).items())
+    dev_packages = list(config.get(f"dev-{package_key}", {}).items())
     dependencies = packages + dev_packages
+
     results = []
     for key, val in dependencies:
+        if poetry and key == "python":
+            # poetry requires a mandatory python version, which is not a valid pip package.
+            # https://python-poetry.org/docs/pyproject/#dependencies-and-dev-dependencies
+            continue
         if type(val) is str:
             if val == "*":
                 continue
-            results.append(f"{key}{val}")
+            results.append(f"{key}{separator}{val}")
         elif "version" in val:
             if val["version"] == "*":
                 continue
-            results.append(f"{key}{val['version']}")
+            results.append(f"{key}{separator}{val['version']}")
 
     for dep in results:
         try:
@@ -146,6 +155,8 @@ def load_dependencies(path="requirements.txt", recursive=True):
             load_yaml(deps, f, p)
         elif p.name == "Pipfile":
             load_toml(deps, f, p)
+        elif p.name == "pyproject.toml":
+            load_toml(deps, f, p, poetry=True)
         else:
             raise RuntimeError(f"Unknown file: {p.name}")
 
