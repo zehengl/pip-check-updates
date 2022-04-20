@@ -145,13 +145,17 @@ def load_pyproject(deps, f, p):
 
     results = []
     for key, val in dependencies:
-        if key == 'python':
+        if key == 'python':  # poetry allows python interpreter verion alongside deps
             continue
 
         if type(val) is str:
             if val == "*":
                 continue
             results.append(f"{key}=={val}")
+        elif "version" in val:
+            if val["version"] == "*":
+                continue
+            results.append(f"{key}=={val['version']}")
 
     for dep in results:
         try:
