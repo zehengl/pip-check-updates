@@ -65,8 +65,15 @@ def compare_versions(current_version, latest_version):
 
 
 def load_txt(deps, f, p, recursive):
-    for dep in f.read().splitlines():
+    """
+    https://pip.pypa.io/en/stable/reference/requirements-file-format/
+    https://pip.pypa.io/en/stable/cli/pip_install/#requirement-specifiers
+    """
+    content = f.read()
+    content = re.sub(r"\\\n", "", content)
+    for dep in content.splitlines():
         dep = re.sub(r"#.*", "", dep).strip()
+        dep = re.sub(r";.*", "", dep).strip()
         dep = re.sub(r"{%.*?%}", "", dep).strip()
         dep = re.sub(r"{{.*?}}", "", dep).strip()
         if not dep:
