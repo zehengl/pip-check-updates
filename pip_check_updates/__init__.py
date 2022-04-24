@@ -55,8 +55,14 @@ def compare_versions(current_version, latest_version):
     if latest_versioning[0] != current_versioning[0]:
         return "major"
 
+    if current_versioning[1] == "*":
+        return None
+
     if latest_versioning[1] != current_versioning[1]:
         return "minor"
+
+    if current_versioning[2] == "*":
+        return None
 
     if latest_versioning[2] != current_versioning[2]:
         return "patch"
