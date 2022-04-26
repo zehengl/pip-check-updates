@@ -148,9 +148,8 @@ Show the helper text:
 pcu -h
 ```
 
-    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i]
-           [--no_ssl_verify] [--no_recursive] [--ignore_warning] [--show_full_path] [--no_color]
-           [--init]
+    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify]
+           [--no_recursive] [--ignore_warning] [--show_full_path] [--no_color] [--ignore_additional_labels] [--init]
            [path]
 
     pip-check-updates.
@@ -160,8 +159,7 @@ pcu -h
 
     optional arguments:
     -h, --help            show this help message and exit
-    -u, --upgrade         overwrite package file with upgraded versions instead of just outputting to
-                            console.
+    -u, --upgrade         overwrite package file with upgraded versions instead of just outputting to console.
     -f FILTER [FILTER ...], --filter FILTER [FILTER ...]
                             include only package names matching the given strings.
     -t {latest,newest,greatest,minor,patch}, --target {latest,newest,greatest,minor,patch}
@@ -173,6 +171,8 @@ pcu -h
     --ignore_warning      ignore warning.
     --show_full_path      show full path.
     --no_color            disable color.
+    --ignore_additional_labels
+                          ignore additional labels.
     --init                initialize pcufile.toml.
 
 ## Test

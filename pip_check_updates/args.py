@@ -73,6 +73,12 @@ def get_args():
         help="disable color.",
     )
     parser.add_argument(
+        "--ignore_additional_labels",
+        action="store_true",
+        default=False,
+        help="ignore additional labels.",
+    )
+    parser.add_argument(
         "--init",
         action="store_true",
         default=False,

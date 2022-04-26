@@ -70,6 +70,12 @@ from pip_check_updates.args import get_args
                 ("no_color", True),
             ],
         ),
+        (
+            "--ignore_additional_labels",
+            [
+                ("ignore_additional_labels", True),
+            ],
+        ),
     ],
 )
 def test_get_args(mocker, cmd, expected):

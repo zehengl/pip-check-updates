@@ -9,6 +9,7 @@ ignore_warning = false
 show_full_path = false
 upgrade = false
 no_color = false
+ignore_additional_labels = false
 filter = [
 ]
 ignores =[

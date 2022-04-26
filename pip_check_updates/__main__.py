@@ -30,6 +30,9 @@ def run():
     ignore_warning = args.ignore_warning or pcu_config.get("ignore_warning", False)
     show_full_path = args.show_full_path or pcu_config.get("show_full_path", False)
     no_color = args.no_color or pcu_config.get("no_color", False)
+    ignore_additional_labels = args.ignore_additional_labels or pcu_config.get(
+        "ignore_additional_labels", False
+    )
     init_ = args.init
 
     if init_:
@@ -81,6 +84,7 @@ def run():
                 filter_ and not any([is_a_match(pattern, name) for pattern in filter_]),
                 target == "minor" and change == "major",
                 target == "patch" and change in ["major", "minor"],
+                ignore_additional_labels and change == "other",
                 any([is_a_match(pattern, name) for pattern in ignores]),
             ]
         ):
