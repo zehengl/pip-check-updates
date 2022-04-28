@@ -2,7 +2,7 @@ __pycache__
 .pytest_cache
 .eggs
 .tox
+.venv
 *.egg-info
 build
 dist
-venv
