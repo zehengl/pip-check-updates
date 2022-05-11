@@ -11,7 +11,7 @@ with open(path.join(here, "requirements.txt")) as f:
 
 setup(
     name="pip-check-updates",
-    packages=find_packages(),
+    packages=find_packages("pip_check_updates"),
     entry_points={
         "console_scripts": [
             "pcu = pip_check_updates.__main__:run",
