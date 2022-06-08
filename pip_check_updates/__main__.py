@@ -42,10 +42,6 @@ def run():
     is_yml = req_path.endswith(".yml") or req_path.endswith(".yaml")
     is_toml = req_path == "Pipfile" or req_path.endswith(".toml")
 
-    if Path(".pcuignore").exists():
-        message = "Please use pcufile.toml instead.\n"
-        print(styled_text(message, "warning", no_color))
-
     if upgrade and txt_output:
         print("Oops, cannot specify both -u and -x. Please pick one.")
         return
