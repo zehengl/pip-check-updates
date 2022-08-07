@@ -7,9 +7,9 @@ from tqdm import tqdm
 
 from . import compare_versions, get_latest_version, load_dependencies
 from .args import get_args
-from .config import read, init_config
+from .config import init_config, read
 from .filter import is_a_match
-from .style import styled_text
+from .style import dot_path, styled_text
 
 
 def run():
@@ -155,7 +155,9 @@ def run():
                     "to install new versions",
                 )
             elif is_yml:
-                conda_cmd = "conda env update --prefix ./venv --prune"
+                conda_cmd = (
+                    f"conda env update --prefix {dot_path(Path('venv'))} --prune"
+                )
                 cmd = f"{conda_cmd} --file {req_path}"
                 print(
                     "Run",
