@@ -102,7 +102,13 @@ def load_txt(deps, f, p, recursive):
 
 
 def load_yaml(deps, f, p):
-    config = yaml.safe_load(f)
+    content = f.read()
+    content = re.sub(r"\\\n", "", content)
+    rows = []
+    for row in content.splitlines():
+        if not re.search(r"{%.*?%}", row) and not re.search(r"{{.*?}}", row):
+            rows.append(row)
+    config = yaml.safe_load("\n".join(rows))
     dependencies = config.get("dependencies", [])
     channels = config.get("channels", ["conda-forge"])
     results = {
