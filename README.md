@@ -12,7 +12,7 @@
 [![Downloads](https://pepy.tech/badge/pip-check-updates)](https://pepy.tech/project/pip-check-updates)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A tool to upgrade dependencies to the latest versions, inspired by [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
@@ -191,13 +191,16 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/ghostebony"><img src="https://avatars.githubusercontent.com/u/47510020?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pedro Américo</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aghostebony" title="Bug reports">🐛</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=ghostebony" title="Code">💻</a></td>
-    <td align="center"><a href="http://kodare.net"><img src="https://avatars.githubusercontent.com/u/332428?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anders Hovmöller</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aboxed" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://jtiai.github.io/"><img src="https://avatars.githubusercontent.com/u/1370289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jani Tiainen</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Ajtiai" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://pelsmaeker.net/"><img src="https://avatars.githubusercontent.com/u/647530?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel A.A. Pelsmaeker</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3AVirtlink" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://github.com/nikolaik"><img src="https://avatars.githubusercontent.com/u/104154?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikolai Røed Kristiansen</b></sub></a><br /><a href="#ideas-nikolaik" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=nikolaik" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/ghostebony"><img src="https://avatars.githubusercontent.com/u/47510020?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pedro Américo</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aghostebony" title="Bug reports">🐛</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=ghostebony" title="Code">💻</a></td>
+      <td align="center"><a href="http://kodare.net"><img src="https://avatars.githubusercontent.com/u/332428?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anders Hovmöller</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aboxed" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="https://jtiai.github.io/"><img src="https://avatars.githubusercontent.com/u/1370289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jani Tiainen</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Ajtiai" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="https://pelsmaeker.net/"><img src="https://avatars.githubusercontent.com/u/647530?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel A.A. Pelsmaeker</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3AVirtlink" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="https://github.com/nikolaik"><img src="https://avatars.githubusercontent.com/u/104154?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikolai Røed Kristiansen</b></sub></a><br /><a href="#ideas-nikolaik" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=nikolaik" title="Code">💻</a></td>
+      <td align="center"><a href="https://itachisan.github.io"><img src="https://avatars.githubusercontent.com/u/1223421?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Giovanni Santini</b></sub></a><br /><a href="#ideas-ItachiSan" title="Ideas, Planning, & Feedback">🤔</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
