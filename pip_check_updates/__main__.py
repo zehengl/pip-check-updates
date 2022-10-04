@@ -5,11 +5,12 @@ from colorama import init
 from tabulate import tabulate
 from tqdm import tqdm
 
-from . import compare_versions, get_latest_version, load_dependencies
 from .args import get_args
 from .config import init_config, read
 from .filter import is_a_match
+from .parser import load_dependencies
 from .style import dot_path, styled_text
+from .version import compare_versions, get_latest_version
 
 
 def run():
