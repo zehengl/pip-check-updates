@@ -1,6 +1,6 @@
 import pytest
 
-from pip_check_updates import compare_versions
+from pip_check_updates.version import compare_versions
 
 
 @pytest.mark.parametrize(

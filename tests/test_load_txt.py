@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from pip_check_updates import load_txt
+from pip_check_updates.parser import load_txt
 
 txt_basic = r"""
 black==22.3.0
