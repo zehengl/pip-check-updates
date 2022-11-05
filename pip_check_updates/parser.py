@@ -6,6 +6,7 @@ from pathlib import Path
 import toml
 import yaml
 
+from .exceptions import FormatNotSupportedError
 from .version import get_current_version
 
 
@@ -116,7 +117,7 @@ def load_dependencies(path="requirements.txt", recursive=True):
         elif p.name == "pyproject.toml":
             load_toml(deps, f, p, poetry=True)
         else:
-            raise RuntimeError(f"Unknown file: {p.name}")
+            raise FormatNotSupportedError
 
     deps = list(dep for dep, _ in itertools.groupby(deps))
 

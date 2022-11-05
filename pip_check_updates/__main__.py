@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 from .args import get_args
 from .config import init_config, read
+from .exceptions import FormatNotSupportedError
 from .filter import is_a_match
 from .parser import load_dependencies
 from .style import dot_path, styled_text
@@ -50,7 +51,24 @@ def run():
     if no_ssl_verify:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-    deps = load_dependencies(req_path, not no_recursive)
+    try:
+        deps = load_dependencies(req_path, not no_recursive)
+    except FileNotFoundError:
+        msg = styled_text(
+            f"{dot_path(Path(req_path))} does not exist.",
+            "error",
+            False,
+        )
+        print(msg)
+        return
+    except FormatNotSupportedError:
+        msg = styled_text(
+            f"{dot_path(Path(req_path))} is not supported.",
+            "error",
+            False,
+        )
+        print(msg)
+        return
 
     if deps and not txt_output:
         action = "Upgrading" if upgrade else "Checking"

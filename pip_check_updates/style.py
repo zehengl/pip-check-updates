@@ -19,6 +19,7 @@ def styled_text(text, category, no_color):
         "cmd": Fore.YELLOW,
         "warning": Fore.YELLOW,
         "success": Fore.GREEN,
+        "error": Fore.RED,
     }
 
     color = mapping.get(category)
