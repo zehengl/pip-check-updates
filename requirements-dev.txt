@@ -4,6 +4,6 @@ pylint==2.15.5
 pytest==7.2.0
 pytest-mock==3.10.0
 setuptools==65.5.1
-tox==3.27.0
+tox==3.27.1
 twine==4.0.1
 wheel==0.38.4
