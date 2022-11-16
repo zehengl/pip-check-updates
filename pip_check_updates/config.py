@@ -2,19 +2,17 @@ from pathlib import Path
 
 import toml
 
-template = """
-target = "latest"
-no_ssl_verify = false
-ignore_warning = false
-show_full_path = false
-upgrade = false
-no_color = false
-ignore_additional_labels = false
-filter = [
-]
-ignores =[
-]
-""".lstrip()
+template = {
+    "target": "latest",
+    "no_ssl_verify": False,
+    "ignore_warning": False,
+    "show_full_path": False,
+    "upgrade": False,
+    "no_color": False,
+    "ignore_additional_labels": False,
+    "filter": [],
+    "ignores": [],
+}
 
 name = "pcufile.toml"
 
@@ -32,4 +30,4 @@ def init_config():
         return
 
     with open(name, "w") as f:
-        f.write(template)
+        toml.dump(template, f)

@@ -5,7 +5,5 @@ show_full_path = false
 upgrade = false
 no_color = false
 ignore_additional_labels = false
-filter = [
-]
-ignores =[
-]
+filter = []
+ignores = []
