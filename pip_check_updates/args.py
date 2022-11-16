@@ -85,6 +85,6 @@ def get_args():
         help="initialize pcufile.toml.",
     )
 
-    args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
 
-    return args
+    return args, unknown

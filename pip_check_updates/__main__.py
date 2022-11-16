@@ -20,7 +20,7 @@ def run():
 
     pcu_config = read()
 
-    args = get_args()
+    args, unknown = get_args()
     req_path = args.path
     upgrade = args.upgrade or pcu_config.get("upgrade", False)
     target = args.target or pcu_config.get("target", None)
@@ -36,6 +36,16 @@ def run():
         "ignore_additional_labels", False
     )
     init_ = args.init
+
+    if unknown:
+        print(
+            styled_text(
+                f"Ignored unrecognized arguments: {', '.join(unknown)}",
+                "warning",
+                False,
+            )
+        )
+        print()
 
     if init_:
         init_config()
