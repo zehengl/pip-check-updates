@@ -162,8 +162,8 @@ pcu -h
     -u, --upgrade         overwrite package file with upgraded versions instead of just outputting to console.
     -f FILTER [FILTER ...], --filter FILTER [FILTER ...]
                             include only package names matching the given strings.
-    -t {latest,newest,greatest,minor,patch}, --target {latest,newest,greatest,minor,patch}
-                            target version to upgrade to: latest, newest, greatest, minor, patch.
+    -t {latest,newest,greatest,major,minor,patch}, --target {latest,newest,greatest,major,minor,patch}
+                            target version to upgrade to: latest, newest, greatest, major, minor, patch.
     -x, --txt             output new requirements file instead of human-readable message.
     -i, --interactive     enable interactive prompts for each dependency.
     --no_ssl_verify       disable SSL verification.
@@ -202,7 +202,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
   </tbody>
   <tfoot>
-    
+
   </tfoot>
 </table>
 

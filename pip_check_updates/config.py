@@ -9,9 +9,11 @@ template = {
     "show_full_path": False,
     "upgrade": False,
     "no_color": False,
+    "no_recursive": False,
     "ignore_additional_labels": False,
     "filter": [],
     "ignores": [],
+    "default_venv": ".venv",
 }
 
 name = "pcufile.toml"

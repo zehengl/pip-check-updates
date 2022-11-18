@@ -25,7 +25,7 @@ def get_args():
     parser.add_argument(
         "-t",
         "--target",
-        choices=["latest", "newest", "greatest", "minor", "patch"],
+        choices=["latest", "newest", "greatest", "major", "minor", "patch"],
         help="target version to upgrade to: latest, newest, greatest, minor, patch.",
     )
     parser.add_argument(

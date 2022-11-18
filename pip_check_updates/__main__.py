@@ -6,7 +6,7 @@ from tabulate import tabulate
 from tqdm import tqdm
 
 from .args import get_args
-from .config import init_config, read
+from .config import init_config, read, template
 from .exceptions import FormatNotSupportedError
 from .filter import is_a_match
 from .parser import load_dependencies
@@ -21,21 +21,28 @@ def run():
     pcu_config = read()
 
     args, unknown = get_args()
+
+    def get_val(name, skip_args=False):
+        return (getattr(args, name) if not skip_args else None) or (
+            pcu_config.get(name, template[name])
+        )
+
     req_path = args.path
-    upgrade = args.upgrade or pcu_config.get("upgrade", False)
-    target = args.target or pcu_config.get("target", None)
-    no_ssl_verify = args.no_ssl_verify or pcu_config.get("no_ssl_verify", False)
-    filter_ = args.filter or pcu_config.get("filter", [])
     txt_output = args.txt
     interactive = args.interactive
-    no_recursive = args.no_recursive or pcu_config.get("no_recursive", False)
-    ignore_warning = args.ignore_warning or pcu_config.get("ignore_warning", False)
-    show_full_path = args.show_full_path or pcu_config.get("show_full_path", False)
-    no_color = args.no_color or pcu_config.get("no_color", False)
-    ignore_additional_labels = args.ignore_additional_labels or pcu_config.get(
-        "ignore_additional_labels", False
-    )
     init_ = args.init
+
+
+
+    upgrade = get_val("upgrade")
+    target = get_val("target")
+    no_ssl_verify = get_val("no_ssl_verify")
+    filter_ = get_val("filter")
+    no_recursive = get_val("no_recursive")
+    ignore_warning = get_val("ignore_warning")
+    show_full_path = get_val("show_full_path")
+    no_color = get_val("no_color")
+    ignore_additional_labels = get_val("ignore_additional_labels")
 
     if unknown:
         print(
@@ -84,7 +91,7 @@ def run():
         action = "Upgrading" if upgrade else "Checking"
         print(f"{action} dependencies")
 
-    ignores = pcu_config.get("ignores", [])
+    ignores = get_val("ignores", skip_args=True)
 
     results = {}
     errors = {}
@@ -108,7 +115,8 @@ def run():
                 not change,
                 filter_ and not any([is_a_match(pattern, name) for pattern in filter_]),
                 target == "minor" and change == "major",
-                target == "patch" and change in ["major", "minor"],
+                target == "patch"
+                and change in ["latest", "newest", "greatest", "major", "minor"],
                 ignore_additional_labels and change == "other",
                 any([is_a_match(pattern, name) for pattern in ignores]),
             ]
@@ -184,15 +192,16 @@ def run():
                     "to install new versions",
                 )
             elif is_yml:
+                default_venv = get_val("default_venv", skip_args=True)
                 conda_cmd = (
-                    f"conda env update --prefix {dot_path(Path('venv'))} --prune"
+                    f"conda env update --prefix {dot_path(Path(default_venv))} --prune"
                 )
                 cmd = f"{conda_cmd} --file {req_path}"
                 print(
                     "Run",
                     styled_text(cmd, "cmd", no_color),
                     "to install new versions",
-                    "\n(assuming you have a local conda environment named 'venv')",
+                    f"\n(assuming you have a local conda environment named '{default_venv}')",
                 )
         else:
             if not is_toml:
