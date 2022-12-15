@@ -72,7 +72,7 @@ def run():
         deps = load_dependencies(req_path, not no_recursive)
     except FileNotFoundError:
         msg = styled_text(
-            f"{dot_path(Path(req_path))} does not exist.",
+            f"{Path(req_path).absolute()} does not exist.",
             "error",
             False,
         )
@@ -80,7 +80,7 @@ def run():
         return
     except FormatNotSupportedError:
         msg = styled_text(
-            f"{dot_path(Path(req_path))} is not supported.",
+            f"{Path(req_path).absolute()} is not supported.",
             "error",
             False,
         )
