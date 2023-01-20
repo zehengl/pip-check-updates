@@ -32,8 +32,6 @@ def run():
     interactive = args.interactive
     init_ = args.init
 
-
-
     upgrade = get_val("upgrade")
     target = get_val("target")
     no_ssl_verify = get_val("no_ssl_verify")
