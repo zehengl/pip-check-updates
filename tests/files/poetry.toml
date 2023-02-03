@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "poetry_toml_test"
+version = "0.1.0"
+description = "Test file for parsing Poetry TOML files."
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.28.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

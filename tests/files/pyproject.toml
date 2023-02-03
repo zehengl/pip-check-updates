@@ -1,0 +1,18 @@
+[project]
+name = "pyproject_toml_test"
+version = "0.1.0"
+description = "Test file for parsing Setuptools & flit TOML files"
+authors = [{ email = "Your Name <you@example.com>" }]
+readme = "README.md"
+
+dependencies = ["requests~=2.28.0"]
+
+# For setuptools and flit there is no way to mark development dependencies
+# These can be carried via an extra marker, e.g.
+#  pip install package[dev]
+[project.optional-dependencies]
+dev = ["black~=23.0.0"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
