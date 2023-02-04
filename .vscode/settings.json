@@ -14,5 +14,10 @@
   "workbench.colorTheme": "Oceanic Next (dimmed bg)",
   "workbench.editor.enablePreview": false,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.productIconTheme": "material-product-icons"
+  "workbench.productIconTheme": "material-product-icons",
+  "python.testing.pytestArgs": [
+    "tests"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }

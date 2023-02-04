@@ -10,6 +10,15 @@ from .exceptions import FormatNotSupportedError
 from .version import get_current_version
 
 
+def clean_requirements_line(dep):
+    """Remove "unsupported" stuff from the requirements line we are parsing."""
+    dep = re.sub(r"#.*", "", dep).strip()
+    dep = re.sub(r";.*", "", dep).strip()
+    dep = re.sub(r"{%.*?%}", "", dep).strip()
+    dep = re.sub(r"{{.*?}}", "", dep).strip()
+    return dep
+
+
 def load_txt(deps, f, p, recursive):
     """
     https://pip.pypa.io/en/stable/reference/requirements-file-format/
@@ -18,10 +27,7 @@ def load_txt(deps, f, p, recursive):
     content = f.read()
     content = re.sub(r"\\\n", "", content)
     for dep in content.splitlines():
-        dep = re.sub(r"#.*", "", dep).strip()
-        dep = re.sub(r";.*", "", dep).strip()
-        dep = re.sub(r"{%.*?%}", "", dep).strip()
-        dep = re.sub(r"{{.*?}}", "", dep).strip()
+        dep = clean_requirements_line(dep)
         if not dep:
             continue
         if dep.startswith("-r") and recursive:
@@ -71,19 +77,50 @@ def load_yaml(deps, f, p):
                 pass
 
 
-def load_toml(deps, f, p, poetry=False):
+def load_toml(deps, f, p, pyproject=False):
+    """Parse a Pipfile or pyproject.toml. By default parses Pipfile."""
     config = toml.load(f)
-    if poetry:
-        config = config.get("tool", {}).get("poetry", {})
-    separator = "==" if poetry else ""
-    package_key = "dependencies" if poetry else "packages"
-    packages = list(config.get(package_key, {}).items())
-    dev_packages = list(config.get(f"dev-{package_key}", {}).items())
+
+    is_poetry = "poetry" in config.get("tool", {})
+
+    if pyproject:
+        # Special handling for pyproject.toml projects
+        if is_poetry:
+            # Handle poetry
+            config = config.get("tool", {}).get("poetry", {})
+        else:
+            # Handle flit and setuptools
+            config = config.get("project", {})
+
+    separator = "==" if pyproject else ""
+
+    package_key = "dependencies" if pyproject else "packages"
+
+    if pyproject and not is_poetry:
+        # setuptools and flit have a requirements.txt like format.
+        # Parse the line and recombine it back in the appropriate way.
+        requirements = [
+            get_current_version(clean_requirements_line(requirement_line))
+            for requirement_line in config.get(package_key, [])
+        ]
+        packages = [(name, version) for name, version, _ in requirements]
+    else:
+        packages = list(config.get(package_key, {}).items())
+
+    # Only Pipfile and poetry support dev dependencies, there is no standard for setuptools and flit
+    if not pyproject:
+        dev_packages = list(config.get(f"dev-{package_key}", {}).items())
+    elif is_poetry:
+        dev_packages = list(
+            config.get(f"group", {}).get(f"dev", {}).get(package_key, {}).items()
+        )
+    else:
+        dev_packages = []
     dependencies = packages + dev_packages
 
     results = []
     for key, val in dependencies:
-        if poetry and key == "python":
+        if pyproject and key == "python":
             # poetry requires a mandatory python version, which is not a valid pip package.
             # https://python-poetry.org/docs/pyproject/#dependencies-and-dev-dependencies
             continue
@@ -115,7 +152,7 @@ def load_dependencies(path="requirements.txt", recursive=True):
         elif p.name == "Pipfile":
             load_toml(deps, f, p)
         elif p.name == "pyproject.toml":
-            load_toml(deps, f, p, poetry=True)
+            load_toml(deps, f, p, pyproject=True)
         else:
             raise FormatNotSupportedError
 
