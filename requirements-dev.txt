@@ -1,9 +1,9 @@
 -r requirements.txt
 black==23.1.0
-pylint==2.16.1
+pylint==2.16.2
 pytest==7.2.1
 pytest-mock==3.10.0
-setuptools==67.2.0
+setuptools==67.3.2
 tox==4.4.5
 twine==4.0.2
 wheel==0.38.4
