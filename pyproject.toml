@@ -1,0 +1,45 @@
+[project]
+name = "pip-check-updates"
+dynamic = ["version", "dependencies"]
+authors = [{ name = "Zeheng Li", email = "imzehengl@gmail.com" }]
+maintainers = [{ name = "Zeheng Li", email = "imzehengl@gmail.com" }]
+description = "A tool to upgrade dependencies to the latest versions"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["pip", "updates"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+
+[project.scripts]
+pcu = "pip_check_updates.__main__:run"
+
+
+[project.urls]
+repository = "https://github.com/zehengl/pip-check-updates"
+homepage = "https://zehengl.github.io/pip-check-updates/"
+
+
+[tool.setuptools_scm]
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = ["--import-mode=importlib"]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+
+[build-system]
+requires = ["setuptools>=67.0", "setuptools_scm>=7.1.0"]
+build-backend = "setuptools.build_meta"
