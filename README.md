@@ -198,9 +198,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="https://itachisan.github.io"><img src="https://avatars.githubusercontent.com/u/1223421?v=4?s=100" width="100px;" alt="Giovanni Santini"/><br /><sub><b>Giovanni Santini</b></sub></a><br /><a href="#ideas-ItachiSan" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=ItachiSan" title="Code">💻</a></td>
     </tr>
   </tbody>
-  <tfoot>
-
-  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->
