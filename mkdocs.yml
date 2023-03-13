@@ -1,0 +1,51 @@
+site_name: pip-check-updates
+nav:
+  - Home: index.md
+theme:
+  name: material
+  favicon: https://cdn2.iconfinder.com/data/icons/flat-jewels-icon-set/512/0000_Refresh.png
+  logo: https://cdn2.iconfinder.com/data/icons/flat-jewels-icon-set/512/0000_Refresh.png
+  font:
+    text: Roboto
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+  features:
+    - header.autohide
+    - content.code.copy
+repo_name: zehengl/pip-check-updates
+repo_url: https://github.com/zehengl/pip-check-updates
+plugins:
+  - search
+  - tags
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: true
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/zehengl
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/zehengl
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
