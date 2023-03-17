@@ -14,6 +14,10 @@ template = {
     "filter": [],
     "ignores": [],
     "default_venv": ".venv",
+    "interactive": False,
+    "txt": False,
+    "init": False,
+    "path": "requirements.txt",
 }
 
 name = "pcufile.toml"
@@ -29,6 +33,13 @@ def read():
 
 def init_config():
     if Path(name).exists():
+        with open(name) as f:
+            config = toml.load(f)
+        for key in template:
+            if key not in config:
+                config[key] = template[key]
+        with open(name, "w") as f:
+            toml.dump(config, f)
         return
 
     with open(name, "w") as f:

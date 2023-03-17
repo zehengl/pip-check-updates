@@ -15,22 +15,19 @@ from .version import compare_versions, get_latest_version
 
 
 def run():
-
     init()
 
     pcu_config = read()
 
     args, unknown = get_args()
 
-    def get_val(name, skip_args=False):
-        return (getattr(args, name) if not skip_args else None) or (
-            pcu_config.get(name, template[name])
-        )
+    def get_val(name):
+        return getattr(args, name, None) or pcu_config.get(name, template[name])
 
-    req_path = args.path
-    txt_output = args.txt
-    interactive = args.interactive
-    init_ = args.init
+    req_path = get_val("path")
+    txt_output = get_val("txt")
+    interactive = get_val("interactive")
+    init_ = get_val("init")
 
     upgrade = get_val("upgrade")
     target = get_val("target")
@@ -54,6 +51,7 @@ def run():
 
     if init_:
         init_config()
+        return
 
     is_txt = req_path.endswith(".txt")
     is_yml = req_path.endswith(".yml") or req_path.endswith(".yaml")
@@ -89,7 +87,7 @@ def run():
         action = "Upgrading" if upgrade else "Checking"
         print(f"{action} dependencies")
 
-    ignores = get_val("ignores", skip_args=True)
+    ignores = get_val("ignores")
 
     results = {}
     errors = {}
@@ -190,7 +188,7 @@ def run():
                     "to install new versions",
                 )
             elif is_yml:
-                default_venv = get_val("default_venv", skip_args=True)
+                default_venv = get_val("default_venv")
                 conda_cmd = (
                     f"conda env update --prefix {dot_path(Path(default_venv))} --prune"
                 )

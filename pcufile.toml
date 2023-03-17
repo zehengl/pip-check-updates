@@ -9,3 +9,7 @@ ignore_additional_labels = false
 filter = []
 ignores = []
 default_venv = ".venv"
+interactive = false
+txt = false
+init = false
+path = "requirements.txt"
