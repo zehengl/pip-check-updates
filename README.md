@@ -172,10 +172,6 @@ pcu -h
                           ignore additional labels.
     --init                initialize pcufile.toml.
 
-## Test
-
-    python setup.py test
-
 ## Credits
 
 - [Icon](https://www.iconfinder.com/icons/171269/refresh_icon) by PixelKit
