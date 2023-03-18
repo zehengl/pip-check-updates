@@ -1,0 +1,1 @@
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"Home","text":""},{"location":"#pip-check-updates","title":"pip-check-updates","text":"<p>A tool to upgrade dependencies to the latest versions, inspired by npm-check-updates</p>"}]}
