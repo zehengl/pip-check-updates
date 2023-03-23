@@ -4,5 +4,5 @@
 black==23.1.0
 build==0.10.0
 pip-check-updates==0.20.0
-pylint==2.17.0
+pylint==2.17.1
 twine==4.0.2
