@@ -86,6 +86,13 @@ def get_args():
         default=None,
         help="initialize pcufile.toml.",
     )
+    parser.add_argument(
+        "--extra",
+        action="append",
+        type=str,
+        default=None,
+        help="extras to consider when parsing TOML files. Not used with Pipfile.",
+    )
 
     args, unknown = parser.parse_known_args()
 
