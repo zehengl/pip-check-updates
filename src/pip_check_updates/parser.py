@@ -77,7 +77,7 @@ def load_yaml(deps, f, p):
                 pass
 
 
-def load_toml(deps, f, p, pyproject=False):
+def load_toml(deps, f, p, pyproject=False, extras=[]):
     """Parse a Pipfile or pyproject.toml. By default parses Pipfile."""
     config = toml.load(f)
 
@@ -96,14 +96,19 @@ def load_toml(deps, f, p, pyproject=False):
 
     package_key = "dependencies" if pyproject else "packages"
 
+    # Quick inline function for properly parsing requirement lines:
+    def parse_requirements_lines(requirements_lines):
+        requirements = [
+            get_current_version(clean_requirements_line(requirement_line))
+            for requirement_line in requirements_lines
+        ]
+        deps = [(name, version) for name, version, _ in requirements]
+        return deps
+
     if pyproject and not is_poetry:
         # setuptools and flit have a requirements.txt like format.
         # Parse the line and recombine it back in the appropriate way.
-        requirements = [
-            get_current_version(clean_requirements_line(requirement_line))
-            for requirement_line in config.get(package_key, [])
-        ]
-        packages = [(name, version) for name, version, _ in requirements]
+        packages = parse_requirements_lines(config.get(package_key, []))
     else:
         packages = list(config.get(package_key, {}).items())
 
@@ -112,11 +117,18 @@ def load_toml(deps, f, p, pyproject=False):
         dev_packages = list(config.get(f"dev-{package_key}", {}).items())
     elif is_poetry:
         dev_packages = list(
-            config.get(f"group", {}).get(f"dev", {}).get(package_key, {}).items()
+            config.get("group", {}).get("dev", {}).get(package_key, {}).items()
         )
     else:
         dev_packages = []
     dependencies = packages + dev_packages
+
+    # Parse extras
+    extras_section = "extras" if is_poetry else "optional-dependencies"
+    for extra in extras:
+        dependencies += parse_requirements_lines(
+            config.get(extras_section, {}).get(extra, [])
+        )
 
     results = []
     for key, val in dependencies:
@@ -141,7 +153,7 @@ def load_toml(deps, f, p, pyproject=False):
             pass
 
 
-def load_dependencies(path="requirements.txt", recursive=True):
+def load_dependencies(path="requirements.txt", recursive=True, extras: list = []):
     p = Path(path).resolve()
     deps = []
     with open(p) as f:
@@ -152,7 +164,7 @@ def load_dependencies(path="requirements.txt", recursive=True):
         elif p.name == "Pipfile":
             load_toml(deps, f, p)
         elif p.name == "pyproject.toml":
-            load_toml(deps, f, p, pyproject=True)
+            load_toml(deps, f, p, pyproject=True, extras=extras)
         else:
             raise FormatNotSupportedError
 

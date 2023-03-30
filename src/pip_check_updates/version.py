@@ -28,9 +28,22 @@ def get_latest_version(name, source, no_ssl_verify):
 
 
 def get_current_version(dep):
-    name, current_version = [token for token in re.split(r"[><=~!^]", dep) if token]
+    split_line = [token for token in re.split(r"[><=~!^]", dep) if token]
+
+    # In case of parsing a requirements line like:
+    #  my_depenency
+    # we just want the latest version of the package. Our unpacking later does not like it.
+    # Just add our internal value for matching any version.
+    if len(split_line) < 2:
+        split_line.append("*")
+
+    name, current_version = split_line
     op = dep[len(name) : -len(current_version)]
-    return name, current_version, op
+
+    # Added .strip() for removing whitespace, in case e.g.
+    #  python_dep == 1.2.3
+    # return 'python_dep' and not 'python_dep '
+    return name.strip(), current_version.strip(), op
 
 
 def compare_versions(current_version, latest_version):

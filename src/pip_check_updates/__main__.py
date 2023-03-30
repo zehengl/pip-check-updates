@@ -38,6 +38,7 @@ def run():
     show_full_path = get_val("show_full_path")
     no_color = get_val("no_color")
     ignore_additional_labels = get_val("ignore_additional_labels")
+    extra = get_val("extra")
 
     if unknown:
         print(
@@ -65,7 +66,7 @@ def run():
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     try:
-        deps = load_dependencies(req_path, not no_recursive)
+        deps = load_dependencies(req_path, not no_recursive, extra)
     except FileNotFoundError:
         msg = styled_text(
             f"{Path(req_path).absolute()} does not exist.",
