@@ -139,6 +139,25 @@ Work with Pipenv (WIP)
 pcu Pipfile
 ```
 
+Include unstable versions:
+
+```terminal
+
+pcu --include-unstable
+
+    Checking dependencies
+    100%|████████████████████| 6/6 [00:01<00:00,  5.75it/s]
+
+    In requirements.txt
+
+    Django  3.1.13  →  3.2.6.dev
+    pandas  0.25.3  →  1.3.2.32.dev
+    tqdm    4.62.0  →  4.62.1.2.dev
+
+    Run pcu requirements.txt -u --include-unstable to upgrade versions in 1 file
+
+```
+
 Show the helper text:
 
 ```terminal
@@ -146,7 +165,7 @@ pcu -h
 ```
 
     usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify]
-           [--no_recursive] [--ignore_warning] [--show_full_path] [--no_color] [--ignore_additional_labels] [--init]
+           [--no_recursive] [--ignore_warning] [--show_full_path] [--no_color] [--ignore_additional_labels] [--init] [--pre]
            [path]
 
     pip-check-updates.
@@ -171,6 +190,7 @@ pcu -h
     --ignore_additional_labels
                           ignore additional labels.
     --init                initialize pcufile.toml.
+    --include-unstable   include unstable versions.
 
 ## Credits
 
