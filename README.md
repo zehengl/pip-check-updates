@@ -143,7 +143,7 @@ Include unstable versions:
 
 ```terminal
 
-pcu --include-unstable
+pcu --pre
 
     Checking dependencies
     100%|████████████████████| 6/6 [00:01<00:00,  5.75it/s]
@@ -154,7 +154,7 @@ pcu --include-unstable
     pandas  0.25.3  →  1.3.2.32.dev
     tqdm    4.62.0  →  4.62.1.2.dev
 
-    Run pcu requirements.txt -u --include-unstable to upgrade versions in 1 file
+    Run pcu requirements.txt -u to upgrade versions in 1 file
 
 ```
 
@@ -190,7 +190,7 @@ pcu -h
     --ignore_additional_labels
                           ignore additional labels.
     --init                initialize pcufile.toml.
-    --include-unstable   include unstable versions.
+    --pre                 include unstable versions.
 
 ## Credits
 

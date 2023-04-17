@@ -78,9 +78,9 @@ from pip_check_updates.args import get_args
             ],
         ),
         (
-            ["--include_unstable"],
+            ["--pre"],
             [
-                ("include_unstable", True),
+                ("pre", True),
             ],
         ),
         (

@@ -95,7 +95,7 @@ def get_args():
     )
 
     parser.add_argument(
-        "--include_unstable",
+        "--pre",
         action="store_true",
         default=False,
         help="include unstable versions when checking for updates.",
