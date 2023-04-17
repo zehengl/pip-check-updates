@@ -39,7 +39,7 @@ from pip_check_updates.version import compare_versions
         ("1.*", "1.0.0", None),
         ("1.2.*", "1.3.0", "minor"),
         ("1.*", "2.0.0", "major"),
-        ("1.2.3", "1.2.4-beta", "other"),
+        ("1.2.3", "1.2.4-beta", "patch"),
         ("1.2.3-beta", "1.2.3", "patch"),
         ("1.2.3-beta", "1.2.4-beta", "patch"),
         ("1.2.3-beta", "1.3.0-alpha", "minor"),
