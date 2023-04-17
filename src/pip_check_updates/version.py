@@ -2,6 +2,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup
+from distutils.version import LooseVersion
 
 
 def get_latest_version(name, source, no_ssl_verify, include_unstable):
@@ -12,7 +13,7 @@ def get_latest_version(name, source, no_ssl_verify, include_unstable):
             if include_unstable:
                 json_data = r.json()
                 releases = json_data["releases"]
-                for ver in sorted(releases.keys(), reverse=True):
+                for ver in sorted(releases.keys(), key=LooseVersion, reverse=True):
                     release_files = releases[ver]
                     for release_file in release_files:
                         if not release_file["yanked"]:
