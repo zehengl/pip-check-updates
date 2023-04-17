@@ -78,6 +78,12 @@ from pip_check_updates.args import get_args
             ],
         ),
         (
+            ["--include_unstable"],
+            [
+                ("include_unstable", True),
+            ],
+        ),
+        (
             ["--not_an_valid_argument", "--no_color"],
             [
                 ("not_an_valid_argument", "not valid"),
