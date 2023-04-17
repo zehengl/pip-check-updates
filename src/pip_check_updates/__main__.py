@@ -39,6 +39,7 @@ def run():
     no_color = get_val("no_color")
     ignore_additional_labels = get_val("ignore_additional_labels")
     extra = get_val("extra")
+    pre = get_val("pre")
 
     if unknown:
         print(
@@ -96,7 +97,7 @@ def run():
         deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output or not deps
     ):
         latest_version = get_latest_version(
-            name.partition("[")[0], source, no_ssl_verify
+            name.partition("[")[0], source, no_ssl_verify, pre
         )
         if latest_version is None:
             if type(source) is list:

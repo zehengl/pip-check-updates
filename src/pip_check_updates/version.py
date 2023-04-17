@@ -1,15 +1,27 @@
 """Module responsible for version parsing."""
 import re
-
 import requests
 from bs4 import BeautifulSoup
+from distutils.version import LooseVersion
 
 
-def get_latest_version(name, source, no_ssl_verify):
+def get_latest_version(name, source, no_ssl_verify, pre):
     if source == "pypi":
         r = requests.get(f"https://pypi.org/pypi/{name}/json", verify=not no_ssl_verify)
         if r.status_code == 200:
             version = r.json()["info"]["version"]
+            if pre:
+                json_data = r.json()
+                releases = json_data["releases"]
+                for ver in sorted(releases.keys(), key=LooseVersion, reverse=True):
+                    release_files = releases[ver]
+                    for release_file in release_files:
+                        if not release_file["yanked"]:
+                            version = ver
+                            break
+                    else:
+                        continue
+                    break
             return version
     elif type(source) is list:
         version = None
