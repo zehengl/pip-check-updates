@@ -23,7 +23,7 @@ theme:
   features:
     - header.autohide
     - content.code.copy
-repo_name: zehengl/pip-check-updates
+repo_name: pip-check-updates
 repo_url: https://github.com/zehengl/pip-check-updates
 plugins:
   - search
