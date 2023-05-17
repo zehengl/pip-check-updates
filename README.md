@@ -32,7 +32,6 @@ From [GitHub](https://github.com/zehengl/pip-check-updates)
 Show any new dependencies for the project in the current directory:
 
 > Changes are color coded
-
 > - Red = major upgrade
 > - Cyan = minor upgrade
 > - Green = patch upgrade
@@ -133,7 +132,7 @@ Work with conda-forge (WIP):
 pcu environment.yml -u
 ```
 
-Work with Pipenv (WIP)
+Work with Pipenv (WIP):
 
 ```terminal
 pcu Pipfile
@@ -142,8 +141,8 @@ pcu Pipfile
 Include unstable versions:
 
 ```terminal
-
 pcu --pre
+```
 
     Checking dependencies
     100%|████████████████████| 6/6 [00:01<00:00,  5.75it/s]
@@ -155,8 +154,6 @@ pcu --pre
     tqdm    4.62.0  →  4.62.1.2.dev
 
     Run pcu requirements.txt -u to upgrade versions in 1 file
-
-```
 
 Show the helper text:
 
