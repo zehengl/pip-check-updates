@@ -211,6 +211,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://itachisan.github.io"><img src="https://avatars.githubusercontent.com/u/1223421?v=4?s=100" width="100px;" alt="Giovanni Santini"/><br /><sub><b>Giovanni Santini</b></sub></a><br /><a href="#ideas-ItachiSan" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=ItachiSan" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://git.coopdevs.org"><img src="https://avatars.githubusercontent.com/u/25091358?v=4?s=100" width="100px;" alt="Pelayo García"/><br /><sub><b>Pelayo García</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/commits?author=oyale" title="Code">💻</a> <a href="#ideas-oyale" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/radusuciu"><img src="https://avatars.githubusercontent.com/u/1108600?v=4?s=100" width="100px;" alt="Radu Suciu"/><br /><sub><b>Radu Suciu</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aradusuciu" title="Bug reports">🐛</a></td>
+    </tr>
   </tbody>
 </table>
 

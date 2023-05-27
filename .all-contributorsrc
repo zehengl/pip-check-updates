@@ -71,6 +71,15 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "radusuciu",
+      "name": "Radu Suciu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1108600?v=4",
+      "profile": "https://github.com/radusuciu",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -79,5 +88,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
