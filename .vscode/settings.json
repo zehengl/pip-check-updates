@@ -8,16 +8,14 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "python.formatting.blackPath": "black",
-  "python.formatting.provider": "black",
-  "python.linting.pylintPath": "pylint",
   "workbench.colorTheme": "Oceanic Next (dimmed bg)",
   "workbench.editor.enablePreview": false,
   "workbench.iconTheme": "vscode-icons",
   "workbench.productIconTheme": "material-product-icons",
-  "python.testing.pytestArgs": [
-    "tests"
-  ],
+  "python.testing.pytestArgs": ["tests"],
   "python.testing.unittestEnabled": false,
-  "python.testing.pytestEnabled": true
+  "python.testing.pytestEnabled": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
 }
