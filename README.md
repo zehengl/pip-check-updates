@@ -11,6 +11,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pip-check-updates)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/pip-check-updates)
 [![Downloads](https://static.pepy.tech/badge/pip-check-updates)](https://pepy.tech/project/pip-check-updates)
+[![GitHub Pages](https://github.com/zehengl/pip-check-updates/actions/workflows/gh-deploy.yml/badge.svg)](https://github.com/zehengl/pip-check-updates/actions/workflows/gh-deploy.yml)
 
 A tool to upgrade dependencies to the latest versions, inspired by [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
 
