@@ -12,4 +12,6 @@ default_venv = ".venv"
 interactive = false
 txt = false
 init = false
-path = "requirements.txt"
+path = "requirements-dev.txt"
+extra = []
+pre = false
