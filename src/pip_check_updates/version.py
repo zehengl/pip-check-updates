@@ -1,5 +1,6 @@
 """Module responsible for version parsing."""
 import re
+
 import requests
 from bs4 import BeautifulSoup
 from packaging.version import Version
