@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 import urllib3
@@ -40,6 +41,7 @@ def run():
     ignore_additional_labels = get_val("ignore_additional_labels")
     extra = get_val("extra")
     pre = get_val("pre")
+    fail_on_update = get_val("fail_on_update")
 
     if unknown:
         print(
@@ -250,6 +252,12 @@ def run():
                 source = f"channel{s}: {source}"
             message = f"WARNING: could not find {libs} on {source}."
             print(styled_text(message, "warning", no_color))
+
+    if fail_on_update:
+        if not results:
+            sys.exit(0)
+        else:
+            sys.exit(1)
 
 
 if __name__ == "__main__":

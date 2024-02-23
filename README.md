@@ -189,6 +189,7 @@ pcu -h
                           ignore additional labels.
     --init                initialize pcufile.toml.
     --pre                 include unstable versions.
+    --fail_on_update      exit with code 1 if updates are available.
 
 ## Credits
 
