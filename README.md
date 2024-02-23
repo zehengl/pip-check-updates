@@ -215,7 +215,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/radusuciu"><img src="https://avatars.githubusercontent.com/u/1108600?v=4?s=100" width="100px;" alt="Radu Suciu"/><br /><sub><b>Radu Suciu</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/issues?q=author%3Aradusuciu" title="Bug reports">🐛</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/atchisson"><img src="https://avatars.githubusercontent.com/u/41149397?v=4?s=100" width="100px;" alt="atchisson"/><br /><sub><b>atchisson</b></sub></a><br /><a href="#ideas-atchisson" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/atchisson"><img src="https://avatars.githubusercontent.com/u/41149397?v=4?s=100" width="100px;" alt="atchisson"/><br /><sub><b>atchisson</b></sub></a><br /><a href="#ideas-atchisson" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=atchisson" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
