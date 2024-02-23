@@ -93,12 +93,16 @@ def get_args():
         default=None,
         help="extras to consider when parsing TOML files. Not used with Pipfile.",
     )
-
     parser.add_argument(
         "--pre",
         action="store_true",
         default=False,
         help="include unstable versions when checking for updates.",
+    )
+    parser.add_argument(
+        "--fail_on_update",
+        action="store_true",
+        help="exit with code 1 if updates are available.",
     )
 
     args, unknown = parser.parse_known_args()

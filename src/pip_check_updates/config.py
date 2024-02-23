@@ -20,6 +20,7 @@ template = {
     "path": "requirements.txt",
     "extra": [],
     "pre": False,
+    "fail_on_update": False,
 }
 
 name = "pcufile.toml"
