@@ -2,7 +2,9 @@ import argparse
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description="pip-check-updates.")
+    parser = argparse.ArgumentParser(
+        description="pip-check-updates: A tool to upgrade dependencies to the latest versions, inspired by npm-check-updates."
+    )
     parser.add_argument(
         "path",
         nargs="?",
@@ -107,7 +109,7 @@ def get_args():
     parser.add_argument(
         "--loggable",
         action="store_true",
-        help="to be logging friendly",
+        help="to be logging friendly.",
     )
 
     args, unknown = parser.parse_known_args()
