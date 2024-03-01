@@ -15,3 +15,5 @@ init = false
 path = "requirements-dev.txt"
 extra = []
 pre = false
+fail_on_update = false
+loggable = false

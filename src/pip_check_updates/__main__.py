@@ -1,10 +1,10 @@
+import logging
 import sys
 from pathlib import Path
 
 import urllib3
 from colorama import init
 from tabulate import tabulate
-from tqdm import tqdm
 
 from .args import get_args
 from .config import init_config, read, template
@@ -42,6 +42,17 @@ def run():
     extra = get_val("extra")
     pre = get_val("pre")
     fail_on_update = get_val("fail_on_update")
+    loggable = get_val("loggable")
+
+    if loggable:
+        from tqdm_loggable.auto import tqdm
+
+        fmt = f"%(asctime)s %(message)s"
+        logging.basicConfig(
+            level=logging.INFO, format=fmt, handlers=[logging.StreamHandler()]
+        )
+    else:
+        from tqdm.auto import tqdm
 
     if unknown:
         print(

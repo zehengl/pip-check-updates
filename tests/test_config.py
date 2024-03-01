@@ -15,3 +15,5 @@ def test_constant():
     assert template["filter"] == []
     assert template["ignores"] == []
     assert template["default_venv"] == ".venv"
+    assert template["fail_on_update"] == False
+    assert template["loggable"] == False

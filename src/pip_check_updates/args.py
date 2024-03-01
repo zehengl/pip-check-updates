@@ -104,6 +104,11 @@ def get_args():
         action="store_true",
         help="exit with code 1 if updates are available.",
     )
+    parser.add_argument(
+        "--loggable",
+        action="store_true",
+        help="to be logging friendly",
+    )
 
     args, unknown = parser.parse_known_args()
 
