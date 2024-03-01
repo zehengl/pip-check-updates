@@ -5,4 +5,4 @@ pyyaml
 requests
 tabulate
 toml
-tqdm
+tqdm-loggable
