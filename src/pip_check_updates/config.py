@@ -21,6 +21,7 @@ template = {
     "extra": [],
     "pre": False,
     "fail_on_update": False,
+    "loggable": False,
 }
 
 name = "pcufile.toml"

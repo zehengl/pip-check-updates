@@ -90,6 +90,18 @@ from pip_check_updates.args import get_args
                 ("no_color", True),
             ],
         ),
+        (
+            ["--fail_on_update"],
+            [
+                ("fail_on_update", True),
+            ],
+        ),
+        (
+            ["--loggable"],
+            [
+                ("loggable", True),
+            ],
+        ),
     ],
 )
 def test_get_args(mocker, cmd, expected):
