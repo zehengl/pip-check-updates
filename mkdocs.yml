@@ -8,15 +8,21 @@ theme:
   font:
     text: Roboto
   palette:
-    - scheme: default
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: indigo
       accent: indigo
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: indigo
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to light mode
@@ -30,9 +36,10 @@ plugins:
   - tags
   - minify:
       minify_html: true
-  - git-revision-date-localized:
-      type: timeago
-      enable_creation_date: true
+  - neoteroi.contribs:
+      contributors:
+        - email: imzehengl@gmail.com
+          image: https://avatars.githubusercontent.com/u/6238966?v=4
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -49,3 +56,5 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+extra_css:
+  - css/neoteroi-mkdocs.css
