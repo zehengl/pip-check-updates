@@ -33,6 +33,7 @@ From [GitHub](https://github.com/zehengl/pip-check-updates)
 Show any new dependencies for the project in the current directory:
 
 > Changes are color coded
+>
 > - Red = major upgrade
 > - Cyan = minor upgrade
 > - Green = patch upgrade
@@ -162,11 +163,11 @@ Show the helper text:
 pcu -h
 ```
 
-    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,minor,patch}] [-x] [-i] [--no_ssl_verify]
-           [--no_recursive] [--ignore_warning] [--show_full_path] [--no_color] [--ignore_additional_labels] [--init] [--pre]
-           [path]
+    usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,major,minor,patch}] [-x] [-i] [--no_ssl_verify] [--no_recursive] [--ignore_warning] [--show_full_path]
+            [--no_color] [--ignore_additional_labels] [--init] [--extra EXTRA] [--pre] [--fail_on_update] [--loggable]
+            [path]
 
-    pip-check-updates.
+    pip-check-updates: A tool to upgrade dependencies to the latest versions, inspired by npm-check-updates.
 
     positional arguments:
     path                  specify path to a requirements file
@@ -188,8 +189,10 @@ pcu -h
     --ignore_additional_labels
                           ignore additional labels.
     --init                initialize pcufile.toml.
-    --pre                 include unstable versions.
+    --extra EXTRA         extras to consider when parsing TOML files. Not used with Pipfile.
+    --pre                 include unstable versions when checking for updates.
     --fail_on_update      exit with code 1 if updates are available.
+    --loggable            to be logging friendly.
 
 ## Credits
 

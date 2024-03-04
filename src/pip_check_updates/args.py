@@ -30,7 +30,7 @@ def get_args():
         "--target",
         choices=["latest", "newest", "greatest", "major", "minor", "patch"],
         default=None,
-        help="target version to upgrade to: latest, newest, greatest, minor, patch.",
+        help="target version to upgrade to: latest, newest, greatest, major, minor, patch.",
     )
     parser.add_argument(
         "-x",
