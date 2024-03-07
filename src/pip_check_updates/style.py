@@ -3,29 +3,27 @@ import os
 import posixpath
 from pathlib import PurePosixPath, PureWindowsPath
 
-from colorama import Fore, Style
-
 
 def styled_text(text, category, no_color):
     if no_color:
         return text
 
     mapping = {
-        "major": Fore.RED,
-        "minor": Fore.CYAN,
-        "patch": Fore.GREEN,
-        "other": Fore.MAGENTA,
-        "info": Fore.BLUE,
-        "cmd": Fore.YELLOW,
-        "warning": Fore.YELLOW,
-        "success": Fore.GREEN,
-        "error": Fore.RED,
+        "major": "red",
+        "minor": "cyan",
+        "patch": "green",
+        "other": "magenta",
+        "info": "blue",
+        "cmd": "yellow",
+        "warning": "bold yellow",
+        "success": "bold green",
+        "error": "bold red",
     }
 
-    color = mapping.get(category)
+    style = mapping.get(category)
 
-    if color:
-        return color + text + Style.RESET_ALL
+    if style:
+        return f"[{style}]{text}[/{style}]"
 
     return text
 

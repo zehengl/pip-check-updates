@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 
 import urllib3
-from colorama import init
-from tabulate import tabulate
+from rich.console import Console
+from rich.table import Table
 
 from .args import get_args
 from .config import init_config, read, template
@@ -16,7 +16,8 @@ from .version import compare_versions, get_latest_version
 
 
 def run():
-    init()
+    console = Console()
+    print, input = console.print, console.input
 
     pcu_config = read()
 
@@ -179,18 +180,23 @@ def run():
             print("In", styled_text(_path, "info", no_color))
             print()
 
-            table = []
+            table = Table(
+                show_edge=False,
+                show_lines=False,
+                show_header=False,
+                show_footer=False,
+                box=None,
+                pad_edge=False,
+            )
             for name, current_version, latest_version, change, op in results[path]:
-                table.append(
-                    (
-                        name,
-                        current_version,
-                        "→",
-                        styled_text(latest_version, change, no_color),
-                    )
+                table.add_row(
+                    name,
+                    current_version,
+                    "→",
+                    styled_text(latest_version, change, no_color),
                 )
 
-            print(tabulate(table, tablefmt="plain", disable_numparse=True))
+            print(table)
 
             print()
 

@@ -1,8 +1,7 @@
 beautifulsoup4
-colorama
 packaging
 pyyaml
 requests
-tabulate
+rich
 toml
 tqdm-loggable
