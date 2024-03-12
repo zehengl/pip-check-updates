@@ -111,6 +111,12 @@ def get_args():
         action="store_true",
         help="to be logging friendly.",
     )
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="store_true",
+        help="show pip-check-updates version",
+    )
 
     args, unknown = parser.parse_known_args()
 

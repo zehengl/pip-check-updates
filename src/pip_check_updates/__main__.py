@@ -6,6 +6,7 @@ import urllib3
 from rich.console import Console
 from rich.table import Table
 
+from . import __version__
 from .args import get_args
 from .config import init_config, read, template
 from .exceptions import FormatNotSupportedError
@@ -44,6 +45,12 @@ def run():
     pre = get_val("pre")
     fail_on_update = get_val("fail_on_update")
     loggable = get_val("loggable")
+    show_version = get_val("version")
+
+    if show_version:
+        print(
+            styled_text(f"pip-check-updates version {__version__}\n", "version", False)
+        )
 
     if loggable:
         from tqdm_loggable.auto import tqdm

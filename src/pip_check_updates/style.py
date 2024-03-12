@@ -18,6 +18,7 @@ def styled_text(text, category, no_color):
         "warning": "bold yellow",
         "success": "bold green",
         "error": "bold red",
+        "version": "bold italic",
     }
 
     style = mapping.get(category)
