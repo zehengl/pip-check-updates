@@ -102,6 +102,12 @@ from pip_check_updates.args import get_args
                 ("loggable", True),
             ],
         ),
+        (
+            ["--version"],
+            [
+                ("version", True),
+            ],
+        ),
     ],
 )
 def test_get_args(mocker, cmd, expected):
