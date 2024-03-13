@@ -2,5 +2,5 @@
 -r requirements-test.txt
 -r requirements.txt
 build==1.1.1
-pip-check-updates==0.25.0
+pip-check-updates==0.26.1
 twine==5.0.0
