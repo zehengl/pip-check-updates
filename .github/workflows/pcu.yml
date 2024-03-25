@@ -4,13 +4,10 @@ on:
     branches: [main]
   schedule:
     - cron: "0 12 * * 1"
-env:
-    RUN_PCU: ${{ env.RUN_PCU }}
 jobs:
   refreshDeps:
     runs-on: ubuntu-latest
     steps:
       - uses: zehengl/refresh-python-dependency@main
-        if: ${{ env.RUN_PCU == 'yes' }}
         with:
           path: requirements-dev.txt
