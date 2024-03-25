@@ -6,7 +6,7 @@ on:
     - cron: "0 12 * * 1"
 jobs:
   refreshDeps:
-    if: github.repository == "zehengl/pip-check-updates"
+    if: github.repository == 'zehengl/pip-check-updates'
     runs-on: ubuntu-latest
     steps:
       - uses: zehengl/refresh-python-dependency@main
