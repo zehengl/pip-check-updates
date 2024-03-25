@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: zehengl/refresh-python-dependency@main
-        if: env.RUN_PCU == 'yes'
+        if: ${{ env.RUN_PCU == 'yes' }}
         with:
           path: requirements-dev.txt
