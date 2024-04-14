@@ -90,6 +90,15 @@
         "ideas",
         "code"
       ]
+    },
+    {
+      "login": "purificant",
+      "name": "purificant",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4669013?v=4",
+      "profile": "https://github.com/purificant",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
