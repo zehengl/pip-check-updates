@@ -1,0 +1,18 @@
+# PDM uses standard pyproject.toml files for project configuration
+# but we're saving it as pyproject.pdm.toml to avoid conflicts with
+# the test pyproject.toml that is used for setuptools and flit
+[project]
+authors = [{email = "Your Name <you@example.com>"}]
+description = "Test file for parsing PDM TOML files"
+name = "pyproject_pdm_toml_test"
+readme = "README.md"
+version = "0.1.0"
+
+dependencies = ["requests~=2.28.0"]
+
+[tool.pdm.dev-dependencies]
+dev = ["black~=23.0.0"]
+
+[build-system]
+build-backend = "pdm-backend"
+requires = ["pdm.backend"]
