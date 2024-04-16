@@ -77,59 +77,8 @@ def load_yaml(deps, f, p):
                 pass
 
 
-def load_toml(deps, f, p, pyproject=False, extras=[]):
-    """Parse a Pipfile or pyproject.toml. By default parses Pipfile."""
-    config = toml.load(f)
-
-    is_poetry = "poetry" in config.get("tool", {})
-
-    if pyproject:
-        # Special handling for pyproject.toml projects
-        if is_poetry:
-            # Handle poetry
-            config = config.get("tool", {}).get("poetry", {})
-        else:
-            # Handle flit and setuptools
-            config = config.get("project", {})
-
-    separator = "==" if pyproject else ""
-
-    package_key = "dependencies" if pyproject else "packages"
-
-    # Quick inline function for properly parsing requirement lines:
-    def parse_requirements_lines(requirements_lines):
-        requirements = [
-            get_current_version(clean_requirements_line(requirement_line))
-            for requirement_line in requirements_lines
-        ]
-        deps = [(name, version) for name, version, _ in requirements]
-        return deps
-
-    if pyproject and not is_poetry:
-        # setuptools and flit have a requirements.txt like format.
-        # Parse the line and recombine it back in the appropriate way.
-        packages = parse_requirements_lines(config.get(package_key, []))
-    else:
-        packages = list(config.get(package_key, {}).items())
-
-    # Only Pipfile and poetry support dev dependencies, there is no standard for setuptools and flit
-    if not pyproject:
-        dev_packages = list(config.get(f"dev-{package_key}", {}).items())
-    elif is_poetry:
-        dev_packages = list(
-            config.get("group", {}).get("dev", {}).get(package_key, {}).items()
-        )
-    else:
-        dev_packages = []
-    dependencies = packages + dev_packages
-
-    # Parse extras
-    extras_section = "extras" if is_poetry else "optional-dependencies"
-    for extra in extras:
-        dependencies += parse_requirements_lines(
-            config.get(extras_section, {}).get(extra, [])
-        )
-
+"""TOML has a few different flavors and they each get a different parser."""
+def _get_toml_results(dependencies, separator, pyproject=False):
     results = []
     for key, val in dependencies:
         if pyproject and key == "python":
@@ -144,13 +93,128 @@ def load_toml(deps, f, p, pyproject=False, extras=[]):
             if val["version"] == "*":
                 continue
             results.append(f"{key}{separator}{val['version']}")
+    return results
 
+
+def _set_toml_deps(p, deps, results):
     for dep in results:
         try:
             name, current_version, op = get_current_version(dep)
             deps.append([p, name, current_version, op, "pypi"])
         except:
             pass
+
+
+def _parse_requirements_lines(requirements_lines):
+    """Shared function for properly parsing requirement lines."""
+    requirements = [
+        get_current_version(clean_requirements_line(requirement_line))
+        for requirement_line in requirements_lines
+    ]
+    deps = [(name, version) for name, version, _ in requirements]
+    return deps
+
+
+def _load_pipfile(p, deps, config):
+    """Parse a Pipfile."""
+    separator = ""
+    package_key = "packages"
+    packages = list(config.get(package_key, {}).items())
+    dev_packages = list(config.get(f"dev-{package_key}", {}).items())
+    dependencies = packages + dev_packages
+    results = _get_toml_results(dependencies, separator)
+    _set_toml_deps(p, deps, results)
+
+
+def _load_pdm(p, deps, config, extras):
+    """Parse a PDM pyproject.toml."""
+    project_config = config.get("project", {})
+    separator = "=="
+    package_key = "dependencies"
+
+    packages = _parse_requirements_lines(project_config.get(package_key, []))
+    dev_packages = _parse_requirements_lines(
+        config.get("tool", {}).get("pdm", {}).get("dev-dependencies", {}).get("dev", [])
+    )
+    dependencies = packages + dev_packages
+
+    # Parse extras
+    extras_section = "optional-dependencies"
+    for extra in extras:
+        dependencies += _parse_requirements_lines(
+            project_config.get(extras_section, {}).get(extra, [])
+        )
+
+    results = _get_toml_results(dependencies, separator, pyproject=True)
+    _set_toml_deps(p, deps, results)
+
+
+def _load_poetry(p, deps, config, extras):
+    """Parse a poetry pyproject.toml."""
+    config = config.get("tool", {}).get("poetry", {})
+    separator = "=="
+    package_key = "dependencies"
+
+    packages = list(config.get(package_key, {}).items())
+    dev_packages = list(
+        config.get("group", {}).get("dev", {}).get(package_key, {}).items()
+    )
+    dependencies = packages + dev_packages
+
+    # Parse extras
+    extras_section = "extras"
+    for extra in extras:
+        dependencies += _parse_requirements_lines(
+            config.get(extras_section, {}).get(extra, [])
+        )
+
+    results = _get_toml_results(dependencies, separator, pyproject=True)
+    _set_toml_deps(p, deps, results)
+
+
+def _load_setuptools_and_flit(p, deps, config, extras):
+    """Parse a setuptools or flit pyproject.toml."""
+    config = config.get("project", {})
+    separator = "=="
+    package_key = "dependencies"
+
+    # setuptools and flit have a requirements.txt like format.
+    # Parse the line and recombine it back in the appropriate way.
+    packages = _parse_requirements_lines(config.get(package_key, []))
+
+    # Only Pipfile and poetry support dev dependencies, there is no standard for setuptools and flit
+    dependencies = packages
+
+    # Parse extras
+    extras_section = "optional-dependencies"
+    for extra in extras:
+        dependencies += _parse_requirements_lines(
+            config.get(extras_section, {}).get(extra, [])
+        )
+
+    results = _get_toml_results(dependencies, separator, pyproject=True)
+    _set_toml_deps(p, deps, results)
+
+
+def load_toml(deps, f, p, pyproject=False, extras=[]):
+    """Parse a Pipfile or pyproject.toml. By default parses Pipfile."""
+    config = toml.load(f)
+
+    is_poetry = "poetry" in config.get("tool", {})
+    is_pdm = "pdm" in config.get("tool", {})
+
+    if pyproject:
+        # Special handling for pyproject.toml projects which can use
+        # different tools
+        if is_poetry:
+            _load_poetry(p, deps, config, extras)
+        elif is_pdm:
+            _load_pdm(p, deps, config, extras)
+        else:
+            # If it's not poetry, then we assume setuptools or flit
+            _load_setuptools_and_flit(p, deps, config, extras)
+    else:
+        _load_pipfile(p, deps, config)
 
 
 def load_dependencies(path="requirements.txt", recursive=True, extras: list = []):

@@ -27,6 +27,8 @@ def repackage(path: Path, deps: List[Tuple[str, str]]):
 
     if path.name == "pyproject.toml":
         operator = "=="
+    elif path.name == "pyproject.pdm.toml":
+        operator = "=="
     elif path.name == "poetry.toml":
         operator = "==^"
     else:
@@ -53,6 +55,13 @@ def repackage(path: Path, deps: List[Tuple[str, str]]):
         (
             "pyproject.toml",
             repackage(toml_path("pyproject.toml"), expected_packages),
+        ),
+        (
+            "pyproject.pdm.toml",
+            repackage(
+                toml_path("pyproject.pdm.toml"),
+                expected_packages + expected_dev_packages
+            ),
         ),
     ],
 )
