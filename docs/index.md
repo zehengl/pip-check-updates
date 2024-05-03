@@ -81,33 +81,34 @@ Run pip install -r requirements.txt to install new versions
 
 ```{ .text .no-copy }
 usage: pcu [-h] [-u] [-f FILTER [FILTER ...]] [-t {latest,newest,greatest,major,minor,patch}] [-x] [-i] [--no_ssl_verify] [--no_recursive] [--ignore_warning] [--show_full_path]
-        [--no_color] [--ignore_additional_labels] [--init] [--extra EXTRA] [--pre] [--fail_on_update] [--loggable]
-        [path]
+           [--no_color] [--ignore_additional_labels] [--init] [--extra EXTRA] [--pre] [--fail_on_update] [--loggable] [-v]
+           [path]
 
 pip-check-updates: A tool to upgrade dependencies to the latest versions, inspired by npm-check-updates.
 
 positional arguments:
-path                  specify path to a requirements file
+  path                  specify path to a requirements file
 
 optional arguments:
--h, --help            show this help message and exit
--u, --upgrade         overwrite package file with upgraded versions instead of just outputting to console.
--f FILTER [FILTER ...], --filter FILTER [FILTER ...]
+  -h, --help            show this help message and exit
+  -u, --upgrade         overwrite package file with upgraded versions instead of just outputting to console.
+  -f FILTER [FILTER ...], --filter FILTER [FILTER ...]
                         include only package names matching the given strings.
--t {latest,newest,greatest,major,minor,patch}, --target {latest,newest,greatest,major,minor,patch}
+  -t {latest,newest,greatest,major,minor,patch}, --target {latest,newest,greatest,major,minor,patch}
                         target version to upgrade to: latest, newest, greatest, major, minor, patch.
--x, --txt             output new requirements file instead of human-readable message.
--i, --interactive     enable interactive prompts for each dependency.
---no_ssl_verify       disable SSL verification.
---no_recursive        disable recursive checking.
---ignore_warning      ignore warning.
---show_full_path      show full path.
---no_color            disable color.
---ignore_additional_labels
+  -x, --txt             output new requirements file instead of human-readable message.
+  -i, --interactive     enable interactive prompts for each dependency.
+  --no_ssl_verify       disable SSL verification.
+  --no_recursive        disable recursive checking.
+  --ignore_warning      ignore warning.
+  --show_full_path      show full path.
+  --no_color            disable color.
+  --ignore_additional_labels
                         ignore additional labels.
---init                initialize pcufile.toml.
---extra EXTRA         extras to consider when parsing TOML files. Not used with Pipfile.
---pre                 include unstable versions when checking for updates.
---fail_on_update      exit with code 1 if updates are available.
---loggable            to be logging friendly.
+  --init                initialize pcufile.toml.
+  --extra EXTRA         extras to consider when parsing TOML files. Not used with Pipfile.
+  --pre                 include unstable versions when checking for updates.
+  --fail_on_update      exit with code 1 if updates are available.
+  --loggable            to be logging friendly.
+  -v, --version         show pip-check-updates version
 ```
