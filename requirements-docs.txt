@@ -1,4 +1,4 @@
-mkdocs-material==9.5.22
+mkdocs-material==9.5.24
 mkdocs-minify-plugin==0.8.0
 mkdocs==1.6.0
 neoteroi-mkdocs==1.0.5
