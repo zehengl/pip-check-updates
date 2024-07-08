@@ -3,4 +3,4 @@
 -r requirements.txt
 build==1.2.1
 pip-check-updates==0.27.0
-twine==5.1.0
+twine==5.1.1
