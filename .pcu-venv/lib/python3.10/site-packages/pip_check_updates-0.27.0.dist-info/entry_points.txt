@@ -1,0 +1,2 @@
+[console_scripts]
+pcu = pip_check_updates.__main__:run
