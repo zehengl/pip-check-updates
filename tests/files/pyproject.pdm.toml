@@ -2,7 +2,7 @@
 # but we're saving it as pyproject.pdm.toml to avoid conflicts with
 # the test pyproject.toml that is used for setuptools and flit
 [project]
-authors = [{email = "Your Name <you@example.com>"}]
+authors = [{ email = "Your Name <you@example.com>" }]
 description = "Test file for parsing PDM TOML files"
 name = "pyproject_pdm_toml_test"
 readme = "README.md"

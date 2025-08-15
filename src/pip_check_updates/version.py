@@ -1,4 +1,5 @@
 """Module responsible for version parsing."""
+
 import re
 
 import requests

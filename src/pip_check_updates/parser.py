@@ -1,4 +1,5 @@
 """Module including all the functions for parsing the input files"""
+
 import itertools
 import re
 from pathlib import Path
@@ -78,6 +79,8 @@ def load_yaml(deps, f, p):
 
 
 """TOML has a few different flavors and they each get a different parser."""
+
+
 def _get_toml_results(dependencies, separator, pyproject=False):
     results = []
     for key, val in dependencies:

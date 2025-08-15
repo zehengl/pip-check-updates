@@ -60,7 +60,7 @@ def repackage(path: Path, deps: List[Tuple[str, str]]):
             "pyproject.pdm.toml",
             repackage(
                 toml_path("pyproject.pdm.toml"),
-                expected_packages + expected_dev_packages
+                expected_packages + expected_dev_packages,
             ),
         ),
     ],
