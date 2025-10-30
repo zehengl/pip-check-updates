@@ -3,8 +3,8 @@ nav:
   - Home: index.md
 theme:
   name: material
-  favicon: https://cdn2.iconfinder.com/data/icons/flat-jewels-icon-set/512/0000_Refresh.png
-  logo: https://cdn2.iconfinder.com/data/icons/flat-jewels-icon-set/512/0000_Refresh.png
+  favicon: https://raw.githubusercontent.com/zehengl/pip-check-updates/refs/heads/main/logo.png
+  logo: https://raw.githubusercontent.com/zehengl/pip-check-updates/refs/heads/main/logo.png
   font:
     text: Roboto
   palette:
