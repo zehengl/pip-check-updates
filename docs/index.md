@@ -1,5 +1,5 @@
 <figure markdown>
-![Logo](https://cdn2.iconfinder.com/data/icons/flat-jewels-icon-set/512/0000_Refresh.png){ width="100" }
+![Logo](https://raw.githubusercontent.com/zehengl/pip-check-updates/refs/heads/main/logo.png){ width="100" }
 </figure>
 
 # pip-check-updates
