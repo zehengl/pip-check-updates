@@ -195,10 +195,6 @@ pcu -h
       --loggable            to be logging friendly.
       -v, --version         show pip-check-updates version
 
-## Credits
-
-- [Icon](https://www.iconfinder.com/icons/171269/refresh_icon) by PixelKit
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
