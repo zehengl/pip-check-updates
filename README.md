@@ -195,6 +195,8 @@ pcu -h
       --loggable            to be logging friendly.
       -v, --version         show pip-check-updates version
 
+> FYI the equivalent full-name command `pip-check-updates` may be used as well.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
