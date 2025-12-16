@@ -218,6 +218,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/atchisson"><img src="https://avatars.githubusercontent.com/u/41149397?v=4?s=100" width="100px;" alt="atchisson"/><br /><sub><b>atchisson</b></sub></a><br /><a href="#ideas-atchisson" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/zehengl/pip-check-updates/commits?author=atchisson" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/purificant"><img src="https://avatars.githubusercontent.com/u/4669013?v=4?s=100" width="100px;" alt="purificant"/><br /><sub><b>purificant</b></sub></a><br /><a href="https://github.com/zehengl/pip-check-updates/commits?author=purificant" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.pulse-mind.com"><img src="https://avatars.githubusercontent.com/u/22203083?v=4?s=100" width="100px;" alt="Pulse-Mind"/><br /><sub><b>Pulse-Mind</b></sub></a><br /><a href="#ideas-pulse-mind" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hzhangxyz"><img src="https://avatars.githubusercontent.com/u/11623447?v=4?s=100" width="100px;" alt="Hao Zhang(张浩)"/><br /><sub><b>Hao Zhang(张浩)</b></sub></a><br /><a href="#ideas-hzhangxyz" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
