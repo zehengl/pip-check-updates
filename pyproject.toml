@@ -16,6 +16,7 @@ classifiers = [
 
 [project.scripts]
 pcu = "pip_check_updates.__main__:run"
+pip-check-updates = "pip_check_updates.__main__:run"
 
 
 [project.urls]
