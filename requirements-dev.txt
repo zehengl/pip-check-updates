@@ -1,6 +1,6 @@
 -r requirements-docs.txt
 -r requirements-test.txt
 -r requirements.txt
-build==1.4.3
+build==1.4.4
 pip-check-updates==0.28.0
 twine==6.2.0
