@@ -5,11 +5,12 @@ authors = [{ name = "Zeheng Li", email = "imzehengl@gmail.com" }]
 maintainers = [{ name = "Zeheng Li", email = "imzehengl@gmail.com" }]
 description = "A tool to upgrade dependencies to the latest versions"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
+license = "MIT"
 keywords = ["pip", "updates"]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development :: Libraries :: Python Modules",
     "Operating System :: OS Independent",
 ]
 
