@@ -43,5 +43,5 @@ dependencies = { file = ["requirements.txt"] }
 
 
 [build-system]
-requires = ["setuptools>=67.0", "setuptools_scm>=7.1.0"]
+requires = ["setuptools>=80", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
