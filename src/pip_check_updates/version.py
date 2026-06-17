@@ -1,5 +1,6 @@
 """Module responsible for version parsing."""
 
+from functools import lru_cache
 import re
 
 import requests
@@ -7,7 +8,14 @@ from bs4 import BeautifulSoup
 from packaging.version import Version
 
 
-def get_latest_version(name, source, no_ssl_verify, pre):
+def _normalize_source(source):
+    if isinstance(source, list):
+        return tuple(source)
+    return source
+
+
+@lru_cache(maxsize=None)
+def _get_latest_version_cached(name, source, no_ssl_verify, pre):
     if source == "pypi":
         r = requests.get(f"https://pypi.org/pypi/{name}/json", verify=not no_ssl_verify)
         if r.status_code == 200:
@@ -25,7 +33,7 @@ def get_latest_version(name, source, no_ssl_verify, pre):
                         continue
                     break
             return version
-    elif type(source) is list:
+    elif type(source) is tuple:
         version = None
         for channel in source:
             r = requests.get(
@@ -39,6 +47,10 @@ def get_latest_version(name, source, no_ssl_verify, pre):
                     break
         return version
     return None
+
+
+def get_latest_version(name, source, no_ssl_verify, pre):
+    return _get_latest_version_cached(name, _normalize_source(source), no_ssl_verify, pre)
 
 
 def get_current_version(dep):
