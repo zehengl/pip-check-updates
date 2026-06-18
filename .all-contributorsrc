@@ -118,6 +118,15 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "AhmWael",
+      "name": "Ahmad Wael",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56698318?v=4",
+      "profile": "https://github.com/AhmWael",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
