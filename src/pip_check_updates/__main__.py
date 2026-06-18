@@ -1,5 +1,6 @@
 import logging
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import urllib3
@@ -14,6 +15,16 @@ from .filter import is_a_match
 from .parser import load_dependencies
 from .style import dot_path, styled_text
 from .version import compare_versions, get_latest_version
+
+
+def _normalize_source(source):
+    if isinstance(source, list):
+        return tuple(source)
+    return source
+
+
+def _version_lookup_key(name, source, no_ssl_verify, pre):
+    return (name.partition("[")[0], _normalize_source(source), no_ssl_verify, pre)
 
 
 def run():
@@ -114,12 +125,42 @@ def run():
 
     results = {}
     errors = {}
-    for path, name, current_version, op, source in tqdm(
-        deps, bar_format="{l_bar}{bar:20}{r_bar}", disable=txt_output or not deps
+    filtered_deps = []
+    version_keys = []
+    latest_versions = {}
+
+    for path, name, current_version, op, source in deps:
+        if filter_ and not any([is_a_match(pattern, name) for pattern in filter_]):
+            continue
+        if any([is_a_match(pattern, name) for pattern in ignores]):
+            continue
+
+        key = _version_lookup_key(name, source, no_ssl_verify, pre)
+        filtered_deps.append((path, name, current_version, op, source, key))
+        if key not in latest_versions:
+            version_keys.append(key)
+            latest_versions[key] = None
+
+    if version_keys:
+        with ThreadPoolExecutor() as executor:
+            future_to_key = {
+                executor.submit(get_latest_version, *key): key for key in version_keys
+            }
+            for future in tqdm(
+                as_completed(future_to_key),
+                total=len(future_to_key),
+                bar_format="{l_bar}{bar:20}{r_bar}",
+                disable=txt_output or not filtered_deps,
+            ):
+                key = future_to_key[future]
+                latest_versions[key] = future.result()
+
+    for path, name, current_version, op, source, key in tqdm(
+        filtered_deps,
+        bar_format="{l_bar}{bar:20}{r_bar}",
+        disable=txt_output or not filtered_deps or bool(version_keys),
     ):
-        latest_version = get_latest_version(
-            name.partition("[")[0], source, no_ssl_verify, pre
-        )
+        latest_version = latest_versions[key]
         if latest_version is None:
             if type(source) is list:
                 source = ", ".join(source)
@@ -132,12 +173,10 @@ def run():
         if any(
             [
                 not change,
-                filter_ and not any([is_a_match(pattern, name) for pattern in filter_]),
                 target == "minor" and change == "major",
                 target == "patch"
                 and change in ["latest", "newest", "greatest", "major", "minor"],
                 ignore_additional_labels and change == "other",
-                any([is_a_match(pattern, name) for pattern in ignores]),
             ]
         ):
             continue
