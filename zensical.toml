@@ -8,6 +8,9 @@ repo_url = "https://github.com/zehengl/pip-check-updates"
 minify_html = true
 minify_css = true
 
+[project.plugins.git-revision-date-localized]
+type = "timeago"
+
 [project.theme]
 variant = "classic"
 favicon = "https://raw.githubusercontent.com/zehengl/pip-check-updates/refs/heads/main/logo.png"
