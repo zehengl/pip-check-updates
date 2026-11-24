@@ -10,6 +10,7 @@ minify_css = true
 
 [project.plugins.git-revision-date-localized]
 type = "timeago"
+enable_creation_date = true
 
 [project.theme]
 variant = "classic"
