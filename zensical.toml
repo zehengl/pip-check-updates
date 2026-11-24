@@ -1,0 +1,54 @@
+[project]
+site_name = "pip-check-updates"
+nav = [{ "Home" = "index.md" }]
+repo_name = "pip-check-updates"
+repo_url = "https://github.com/zehengl/pip-check-updates"
+
+[project.plugins.minify]
+minify_html = true
+minify_css = true
+
+[project.theme]
+variant = "classic"
+favicon = "https://raw.githubusercontent.com/zehengl/pip-check-updates/refs/heads/main/logo.png"
+logo = "https://raw.githubusercontent.com/zehengl/pip-check-updates/refs/heads/main/logo.png"
+font.text = "Roboto"
+features = ["header.autohide", "content.code.copy"]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "material/brightness-auto"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "indigo"
+accent = "indigo"
+toggle.icon = "material/toggle-switch"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "blue"
+accent = "blue"
+toggle.icon = "material/toggle-switch-off-outline"
+toggle.name = "Switch to light mode"
+
+[project.markdown_extensions]
+attr_list = {}
+md_in_html = {}
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.snippets = {}
+pymdownx.superfences = {}
+
+
+[project.extra]
+social = [
+  { icon = "fontawesome/brands/github", link = "https://github.com/zehengl" },
+  { icon = "fontawesome/brands/linkedin", link = "https://linkedin.com/in/zehengl" },
+]
