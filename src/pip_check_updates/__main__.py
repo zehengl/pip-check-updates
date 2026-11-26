@@ -283,7 +283,7 @@ def run():
             styled_text(":)", "success", no_color),
         )
 
-    if not is_toml:
+    if not is_toml or upgrade:
         for path in results:
             with open(path) as f:
                 content = f.read()
